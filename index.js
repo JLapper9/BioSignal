@@ -39,7 +39,48 @@
   function observeNew(container) {
     container.querySelectorAll('.anim-in').forEach(function(el) { _animObs.observe(el); });
   }
+  function setPageView(page) {
+    var tabs = document.querySelectorAll('.page-tab');
+    var panes = document.querySelectorAll('.page-pane');
+    tabs.forEach(function(tab) {
+      tab.classList.toggle('active', tab.dataset.page === page);
+    });
+    panes.forEach(function(pane) {
+      if (page === 'overview') {
+        pane.classList.remove('hidden');
+      } else {
+        pane.classList.toggle('hidden', pane.dataset.page !== page);
+      }
+    });
+    var hash = page === 'overview' ? '#page-tabs' : '#' + page;
+    if (location.hash !== hash) {
+      history.replaceState(null, '', hash);
+    }
+  }
 
+  function initPageTabs() {
+    document.querySelectorAll('.page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        setPageView(tab.dataset.page);
+      });
+    });
+
+    var hash = location.hash.replace('#', '');
+    var pageMap = {
+      news: 'news',
+      science: 'news',
+      fda: 'fda',
+      'fda-spotlight': 'fda',
+      companies: 'pipeline',
+      pipeline: 'pipeline',
+      sec: 'sec',
+      'sec-activity': 'sec',
+      investing: 'investing',
+      overview: 'overview',
+      'page-tabs': 'news',
+    };
+    setPageView(pageMap[hash] || 'news');
+  }
   /* ── Ticker (live news headlines) ──────────────────────────── */
 
   async function updateTicker() {
@@ -369,7 +410,7 @@
             return '<div class="search-result-item"><span class="cat-badge regulatory" style="font-size:.62rem;">FDA</span>' +
               '<h4 style="margin:4px 0;font-size:.88rem;">' + brand + '</h4>' +
               (r.sponsor_name ? '<p style="font-size:.78rem;color:var(--text-dark);">' + BS.truncate(r.sponsor_name, 50) + '</p>' : '') +
-              '<a href="dashboard.html#fda-section" style="font-size:.75rem;color:var(--accent);">View in Dashboard &rarr;</a>' +
+              '<a href="#fda-spotlight" style="font-size:.75rem;color:var(--accent);">View in Dashboard &rarr;</a>' +
               '</div>';
           }).join('')
         : '<div style="padding:12px;color:var(--text-dark);">No FDA matches.</div>';
@@ -397,6 +438,7 @@
   function init() {
     wireFDAPills();
     initSearch();
+    initPageTabs();
 
     Promise.allSettled([
       updateTicker(),

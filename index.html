@@ -29,36 +29,44 @@
         </button>
       </div>
       <nav class="nav" id="main-nav">
-        <a href="#science"    class="nav-link" data-section="science">Science</a>
-        <a href="#companies"  class="nav-link" data-section="companies">Companies</a>
-        <a href="#investing"  class="nav-link" data-section="investing">Investing</a>
-        <a href="#newsletter" class="nav-link">Newsletter</a>
-        <a href="dashboard.html" class="nav-link" style="color:var(--accent); border-bottom-color:var(--accent);">&#9881; Live Dashboard</a>
+        <div class="nav-item nav-dropdown">
+          <a href="#news" class="nav-link">News</a>
+          <div class="dropdown-menu">
+            <a href="#science-news">Biotech</a>
+            <a href="#science-news">Pharma</a>
+            <a href="#fda-spotlight">FDA</a>
+            <a href="#fda-spotlight">Drug Approvals</a>
+            <a href="#science">Conferences</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="#companies" class="nav-link">Companies</a>
+          <div class="dropdown-menu">
+            <a href="#companies">Pipeline Tracker</a>
+            <a href="#sec">SEC Filings</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="#investing" class="nav-link">Market</a>
+          <div class="dropdown-menu">
+            <a href="#investing">Overview</a>
+            <a href="#funding">Funding</a>
+            <a href="#ipos">IPO</a>
+            <a href="#investing">M&A</a>
+            <a href="#fda-calendar">FDA Calendar</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="#science" class="nav-link">Science</a>
+          <div class="dropdown-menu">
+            <a href="#science">Drugs</a>
+            <a href="#science-trials">Clinical Trials</a>
+            <a href="#science-pubs">Research</a>
+          </div>
+        </div>
       </nav>
       <a href="#newsletter" class="btn btn-primary btn-sm nav-cta">Subscribe Free</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-    </div>
-    <div class="header-secondary">
-      <div class="container header-secondary-inner">
-        <div class="sub-links">
-          <span class="sub-label">Science:</span>
-          <a href="#science-news">Top Headlines</a>
-          <a href="#science-trials">Clinical Trials</a>
-          <a href="#science-pubs">Research</a>
-        </div>
-        <div class="sub-links">
-          <span class="sub-label">Companies:</span>
-          <a href="#pipeline">Pipeline Tracker</a>
-          <a href="#sec-activity">SEC Filings</a>
-        </div>
-        <div class="sub-links">
-          <span class="sub-label">Investing:</span>
-          <a href="#market">Market Pulse</a>
-          <a href="#fda-calendar">FDA Calendar</a>
-          <a href="#funding">Funding</a>
-          <a href="#ipos">IPOs</a>
-        </div>
-      </div>
     </div>
   </header>
 
@@ -78,7 +86,7 @@
       <div id="hs-fda"    class="search-results-pane hidden"></div>
       <div id="hs-trials" class="search-results-pane hidden"></div>
       <p style="margin-top:16px; font-size:.78rem; color:var(--text-dark);">
-        <a href="dashboard.html" style="color:var(--accent);">Open full dashboard</a> for complete cross-source search including PubMed and SEC EDGAR.
+        <a href="#page-tabs" style="color:var(--accent);">Open full dashboard</a> for complete cross-source search including PubMed and SEC EDGAR.
       </p>
     </div>
   </div>
@@ -92,13 +100,26 @@
       <h1>Science. Companies.<br />Investing. All in one place.</h1>
       <p class="hero-sub">From groundbreaking research and pipeline milestones to funding rounds and FDA decisions — BioSignal is where biotech professionals start their day.</p>
       <div class="hero-actions">
-        <a href="dashboard.html" class="btn btn-primary">&#9881; Live Dashboard</a>
+        <a href="#page-tabs" class="btn btn-primary">&#9881; Live Dashboard</a>
         <a href="#science"   class="btn btn-ghost">Science</a>
         <a href="#companies" class="btn btn-ghost">Companies</a>
         <a href="#investing" class="btn btn-ghost">Investing</a>
       </div>
     </div>
     <div class="hero-bg-grid"></div>
+  </section>
+
+  <section class="page-tabs-section" id="page-tabs">
+    <div class="container">
+      <div class="page-tabs">
+        <button class="page-tab" data-page="overview">Overview</button>
+        <button class="page-tab active" data-page="news">News</button>
+        <button class="page-tab" data-page="fda">FDA</button>
+        <button class="page-tab" data-page="pipeline">Pipeline</button>
+        <button class="page-tab" data-page="sec">SEC Filings</button>
+        <button class="page-tab" data-page="investing">Investing</button>
+      </div>
+    </div>
   </section>
 
   <!-- Ticker — populated with live RSS headlines by index.js -->
@@ -145,12 +166,12 @@
   <!-- ═══════════════════════════════════════
        SCIENCE HUB — Live RSS + Trials + PubMed
   ════════════════════════════════════════ -->
-  <section class="section section-science" id="science">
+  <section class="section section-science page-pane" data-page="news" id="science">
     <div class="container">
       <div class="section-badge science-badge">Science &amp; Research</div>
       <div class="section-header-row">
         <h2 class="section-title">Latest in Biotech Science</h2>
-        <a href="dashboard.html#rss-section" class="view-all">View all headlines &rarr;</a>
+        <a href="#science" class="view-all">View all headlines &rarr;</a>
       </div>
 
       <!-- News topic filter pills -->
@@ -179,7 +200,7 @@
           <div class="trial-timeline" id="hub-trials-list">
             <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading trials&hellip;</div>
           </div>
-          <a href="dashboard.html#trials-section" class="view-all" style="margin-top:16px; display:inline-block;">Full trial tracker &rarr;</a>
+          <a href="#science" class="view-all" style="margin-top:16px; display:inline-block;">Full trial tracker &rarr;</a>
         </div>
       </div>
 
@@ -189,7 +210,7 @@
         <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading research&hellip;</div>
       </div>
       <div style="text-align:right; margin-top:8px;">
-        <a href="dashboard.html#pubmed-section" class="view-all">All PubMed research &rarr;</a>
+        <a href="#science" class="view-all">All PubMed research &rarr;</a>
       </div>
 
     </div>
@@ -199,12 +220,12 @@
   <!-- ═══════════════════════════════════════
        FDA SPOTLIGHT — Live OpenFDA
   ════════════════════════════════════════ -->
-  <section class="section" id="fda-spotlight" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <section class="section page-pane" data-page="fda" id="fda-spotlight" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
     <div class="container">
       <div class="section-badge regulatory-badge" style="background:rgba(248,113,113,.1); color:var(--oncology); border:1px solid rgba(248,113,113,.2);">FDA Intelligence &middot; OpenFDA</div>
       <div class="section-header-row">
         <h2 class="section-title">FDA Spotlight</h2>
-        <a href="dashboard.html#fda-section" class="view-all">Full FDA dashboard &rarr;</a>
+        <a href="#fda-spotlight" class="view-all">Full FDA dashboard &rarr;</a>
       </div>
       <p class="section-sub">Recent drug approvals, safety recalls, and regulatory decisions — live from api.fda.gov</p>
 
@@ -227,7 +248,7 @@
   <!-- ═══════════════════════════════════════
        COMPANY INTELLIGENCE
   ════════════════════════════════════════ -->
-  <section class="section section-companies" id="companies">
+  <section class="section section-companies page-pane" data-page="pipeline" id="companies">
     <div class="container">
       <div class="section-badge companies-badge">Company Intelligence</div>
       <div class="section-header-row">
@@ -445,11 +466,32 @@
         </div>
 
       </div>
+    </div>
+  </section>
 
-      <!-- ── SEC Activity — Live EDGAR data ── -->
+  <section class="section section-companies page-pane" data-page="sec" id="sec">
+    <div class="container">
+      <div class="section-header-row" style="margin-top:0;" id="sec-activity">
+        <h2 class="section-title">SEC Filings Activity</h2>
+        <a href="#sec" class="view-all">All SEC filings &rarr;</a>
+      </div>
+      <p class="section-sub">Recent 10-K, 10-Q, 8-K, and S-1 filings from biotech and pharma companies via SEC EDGAR. IPOs and major events highlighted.</p>
+
+      <div class="news-grid" id="hub-sec-grid" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); margin-top:20px;">
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       INVESTING DASHBOARD
+  ════════════════════════════════════════ -->
       <div class="section-header-row" style="margin-top:56px;" id="sec-activity">
         <h2 class="section-title">SEC Filings Activity</h2>
-        <a href="dashboard.html#sec-section" class="view-all">All SEC filings &rarr;</a>
+          <a href="#sec" class="view-all">All SEC filings &rarr;</a>
       </div>
       <p class="section-sub">Recent 10-K, 10-Q, 8-K, and S-1 filings from biotech and pharma companies via SEC EDGAR. IPOs and major events highlighted.</p>
 
@@ -467,7 +509,7 @@
   <!-- ═══════════════════════════════════════
        INVESTING DASHBOARD
   ════════════════════════════════════════ -->
-  <section class="section section-investing" id="investing">
+  <section class="section section-investing page-pane" data-page="investing" id="investing">
     <div class="container">
       <div class="section-badge investing-badge">Investing Dashboard</div>
       <h2 class="section-title">Biotech Market &amp; Deal Intelligence</h2>
@@ -480,19 +522,19 @@
           <div class="tile-ticker">XBI — SPDR S&P Biotech ETF</div>
           <div class="tile-price" style="color:var(--text-dark);">— —</div>
           <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: $64 – $102 &middot; <a href="dashboard.html#market-section" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
+          <div class="tile-note">52W Range: $64 – $102 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
         </div>
         <div class="market-tile" data-change="+0">
           <div class="tile-ticker">IBB — iShares Biotech ETF</div>
           <div class="tile-price" style="color:var(--text-dark);">— —</div>
           <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: $128 – $181 &middot; <a href="dashboard.html#market-section" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
+          <div class="tile-note">52W Range: $128 – $181 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
         </div>
         <div class="market-tile" data-change="+0">
           <div class="tile-ticker">NBI — NASDAQ Biotech Index</div>
           <div class="tile-price" style="color:var(--text-dark);">— —</div>
           <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: 3,420 – 4,870 &middot; <a href="dashboard.html#market-section" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
+          <div class="tile-note">52W Range: 3,420 – 4,870 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
         </div>
         <div class="market-tile market-tile-deals">
           <div class="tile-ticker">Deal Volume — Q1 2026</div>
@@ -572,7 +614,7 @@
             </div>
 
           </div>
-          <a href="dashboard.html#fda-section" class="view-all" style="margin-top:12px; display:inline-block;">Full FDA dashboard &rarr;</a>
+          <a href="#fda-spotlight" class="view-all" style="margin-top:12px; display:inline-block;">Full FDA dashboard &rarr;</a>
         </div>
 
         <!-- Funding Rounds -->
