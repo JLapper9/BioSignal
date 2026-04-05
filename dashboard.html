@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioSignal — Live Intelligence Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header dash-header">
+    <div class="container header-primary">
+      <a href="index.html" class="logo">Bio<span>Signal</span></a>
+      <div class="dash-search-wrap">
+        <input
+          type="search"
+          id="global-search"
+          class="dash-search"
+          placeholder="Search drugs, trials, research, companies…"
+          autocomplete="off"
+        />
+        <button class="search-btn" id="search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="search-clear hidden" id="search-clear" aria-label="Clear">&#10005;</button>
+      </div>
+      <nav class="nav" id="main-nav">
+        <a href="index.html">Hub</a>
+        <a href="#rss-section">News</a>
+        <a href="#fda-section">FDA</a>
+        <a href="#pubmed-section">Research</a>
+        <a href="#trials-section">Trials</a>
+        <a href="#sec-section">SEC</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ═══ DASHBOARD TITLE BAR ═══ -->
+  <div class="dash-titlebar">
+    <div class="container dash-titlebar-inner">
+      <div>
+        <h1 class="dash-title">Live Intelligence Dashboard</h1>
+        <p class="dash-subtitle">Real-time data from RSS Feeds &middot; OpenFDA &middot; PubMed/NCBI &middot; ClinicalTrials.gov &middot; SEC EDGAR</p>
+      </div>
+      <div class="dash-meta">
+        <div class="refresh-info">
+          <span class="refresh-label">Last refreshed:</span>
+          <span id="last-updated">Loading…</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="refresh-all-btn">&#8635; Refresh All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ API STATUS BAR ═══ -->
+  <div class="api-status-bar">
+    <div class="container api-status-inner">
+      <span class="api-label">API Status:</span>
+      <div class="api-indicator" id="status-rss">
+        <span class="status-dot dot-loading"></span>
+        <span>NewsAPI</span>
+      </div>
+      <div class="api-indicator" id="status-fda">
+        <span class="status-dot dot-loading"></span>
+        <span>OpenFDA</span>
+      </div>
+      <div class="api-indicator" id="status-pubmed">
+        <span class="status-dot dot-loading"></span>
+        <span>PubMed / NCBI</span>
+      </div>
+      <div class="api-indicator" id="status-trials">
+        <span class="status-dot dot-loading"></span>
+        <span>ClinicalTrials.gov</span>
+      </div>
+      <div class="api-indicator" id="status-sec">
+        <span class="status-dot dot-loading"></span>
+        <span>SEC EDGAR</span>
+      </div>
+      <div class="api-label" style="margin-left:auto; color: var(--text-dark); font-size:0.75rem;">
+        Auto-refreshes on page load &middot; RSS, FDA, PubMed, Trials, EDGAR — all free, no API keys
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SEARCH RESULTS PANEL ═══ -->
+  <div class="search-panel hidden" id="search-panel">
+    <div class="container">
+      <div class="search-panel-header">
+        <h2>Search results for &ldquo;<span id="search-query-display"></span>&rdquo;</h2>
+        <button class="btn btn-ghost btn-sm" id="close-search">&#10005; Clear search</button>
+      </div>
+      <div class="search-tabs">
+        <button class="search-tab active" data-target="sr-rss">News <span class="tab-count" id="sr-rss-count">–</span></button>
+        <button class="search-tab" data-target="sr-fda">FDA <span class="tab-count" id="sr-fda-count">–</span></button>
+        <button class="search-tab" data-target="sr-pubmed">Research <span class="tab-count" id="sr-pubmed-count">–</span></button>
+        <button class="search-tab" data-target="sr-trials">Trials <span class="tab-count" id="sr-trials-count">–</span></button>
+      </div>
+      <div id="sr-rss"    class="search-results-pane"></div>
+      <div id="sr-fda"    class="search-results-pane hidden"></div>
+      <div id="sr-pubmed" class="search-results-pane hidden"></div>
+      <div id="sr-trials" class="search-results-pane hidden"></div>
+    </div>
+  </div>
+
+  <!-- ═══ MAIN DASHBOARD ═══ -->
+  <main class="dash-main">
+
+    <!-- ───────────────────────────────────────
+         SECTION 1: RSS News Timeline
+    ─────────────────────────────────────────── -->
+    <section class="dash-section" id="rss-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge rss-badge">
+              <span class="live-dot"></span> Live &middot; NewsAPI
+            </div>
+            <h2 class="ds-title">Biotech News Timeline</h2>
+            <p class="ds-sub">Latest headlines across biotech, pharma, FDA, and clinical research — unified and sorted newest first</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div class="pill-row" id="rss-source-pills" style="margin:0;">
+              <button class="cat-pill active" data-topic="all">All Topics</button>
+              <button class="cat-pill" data-topic="biotech">Biotech</button>
+              <button class="cat-pill" data-topic="fda">FDA</button>
+              <button class="cat-pill" data-topic="pharma">Pharma</button>
+              <button class="cat-pill" data-topic="trials">Clinical Trials</button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-grid" id="rss-grid">
+          <!-- Populated by dashboard.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 2: OpenFDA
+    ─────────────────────────────────────────── -->
+    <section class="dash-section dash-section-alt" id="fda-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge fda-badge">
+              <span class="live-dot"></span> Live &middot; OpenFDA
+            </div>
+            <h2 class="ds-title">FDA Drug Intelligence</h2>
+            <p class="ds-sub">Recent approvals, active recalls, and adverse event signals from api.fda.gov</p>
+          </div>
+          <a href="https://open.fda.gov" target="_blank" rel="noopener" class="api-source-link">api.fda.gov &#8599;</a>
+        </div>
+
+        <div class="ds-tabs" id="fda-tabs">
+          <button class="ds-tab active" data-tab="approvals">Drug Approvals</button>
+          <button class="ds-tab" data-tab="recalls">Safety Recalls</button>
+          <button class="ds-tab" data-tab="events">Adverse Events</button>
+        </div>
+
+        <div class="ds-grid" id="fda-grid">
+          <!-- Populated by dashboard.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 3: PubMed / NCBI
+    ─────────────────────────────────────────── -->
+    <section class="dash-section" id="pubmed-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge pubmed-badge">
+              <span class="live-dot"></span> Live &middot; NCBI E-utilities
+            </div>
+            <h2 class="ds-title">Research &amp; Publications</h2>
+            <p class="ds-sub">Latest biotech and life sciences research from PubMed — filtered by topic</p>
+          </div>
+          <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener" class="api-source-link">pubmed.ncbi.nlm.nih.gov &#8599;</a>
+        </div>
+
+        <div class="pill-row" id="pubmed-pills">
+          <button class="cat-pill active" data-topic="biotech life sciences gene therapy">All Biotech</button>
+          <button class="cat-pill" data-topic="gene therapy CRISPR base editing">Gene Therapy</button>
+          <button class="cat-pill" data-topic="oncology cancer immunotherapy CAR-T">Oncology</button>
+          <button class="cat-pill" data-topic="mRNA vaccine platform therapeutics">mRNA</button>
+          <button class="cat-pill" data-topic="antibody drug conjugate ADC bispecific">ADC / Antibodies</button>
+          <button class="cat-pill" data-topic="rare disease orphan drug enzyme replacement">Rare Disease</button>
+          <button class="cat-pill" data-topic="neuroscience CNS neurodegeneration Alzheimer">CNS / Neuro</button>
+        </div>
+
+        <div class="ds-grid" id="pubmed-grid">
+          <!-- Populated by dashboard.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 4: ClinicalTrials.gov
+    ─────────────────────────────────────────── -->
+    <section class="dash-section dash-section-alt" id="trials-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge trials-badge">
+              <span class="live-dot"></span> Live &middot; ClinicalTrials.gov v2
+            </div>
+            <h2 class="ds-title">Active Clinical Trials</h2>
+            <p class="ds-sub">Recruiting and active biotech trials — updated daily by ClinicalTrials.gov</p>
+          </div>
+          <a href="https://clinicaltrials.gov" target="_blank" rel="noopener" class="api-source-link">clinicaltrials.gov &#8599;</a>
+        </div>
+
+        <div class="pill-row" id="trials-pills">
+          <button class="cat-pill active" data-status="RECRUITING,ACTIVE_NOT_RECRUITING" data-query="biotech OR gene therapy OR oncology OR CRISPR">All Active</button>
+          <button class="cat-pill" data-status="RECRUITING" data-query="gene therapy CRISPR">Gene Therapy</button>
+          <button class="cat-pill" data-status="RECRUITING" data-query="oncology cancer immunotherapy">Oncology</button>
+          <button class="cat-pill" data-status="RECRUITING" data-query="rare disease orphan">Rare Disease</button>
+          <button class="cat-pill" data-status="RECRUITING" data-query="neuroscience Alzheimer Parkinson CNS">CNS</button>
+          <button class="cat-pill" data-status="RECRUITING" data-query="mRNA vaccine therapeutic">mRNA</button>
+        </div>
+
+        <div id="trials-grid">
+          <!-- Populated by dashboard.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 5: SEC EDGAR Filings
+    ─────────────────────────────────────────── -->
+    <section class="dash-section" id="sec-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge sec-badge">
+              <span class="live-dot"></span> Live &middot; SEC EDGAR
+            </div>
+            <h2 class="ds-title">SEC Filings</h2>
+            <p class="ds-sub">Recent 10-K, 10-Q, 8-K, and S-1 filings from biotech and pharmaceutical companies. IPOs, mergers, and major financial events flagged.</p>
+          </div>
+          <a href="https://efts.sec.gov/LATEST/search-index?q=%22biotech%22+OR+%22pharmaceutical%22&forms=S-1%2C8-K%2C10-K%2C10-Q" target="_blank" rel="noopener" class="api-source-link">efts.sec.gov &#8599;</a>
+        </div>
+
+        <div class="pill-row" id="sec-pills">
+          <button class="cat-pill active" data-forms="S-1,8-K,10-K,10-Q">All Filings</button>
+          <button class="cat-pill" data-forms="S-1,S-1/A">IPO (S-1)</button>
+          <button class="cat-pill" data-forms="8-K">Events (8-K)</button>
+          <button class="cat-pill" data-forms="10-K">Annual (10-K)</button>
+          <button class="cat-pill" data-forms="10-Q">Quarterly (10-Q)</button>
+        </div>
+
+        <div class="ds-grid" id="sec-grid">
+          <!-- Populated by dashboard.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 6: Biotech Market Overview
+         ⚠️ Placeholder — requires API key
+    ─────────────────────────────────────────── -->
+    <section class="dash-section dash-section-alt" id="market-section">
+      <div class="container">
+        <div class="ds-header">
+          <div>
+            <div class="ds-badge placeholder-badge">
+              ⚠️ Pending API Key &middot; Market Data
+            </div>
+            <h2 class="ds-title" style="opacity:0.7;">Biotech Market Overview</h2>
+            <p class="ds-sub">Major biotech ETFs and indices — connect Alpha Vantage or Finnhub to enable live prices</p>
+          </div>
+        </div>
+        <div class="placeholder-banner">
+          <div class="placeholder-icon">&#9888;</div>
+          <div class="placeholder-text">
+            <strong>Free API Key Required</strong>
+            <span>Get a free key from <em>Alpha Vantage</em> (alphavantage.co) or <em>Finnhub</em> (finnhub.io), then set <code>ENDPOINTS.market</code> in <code>biosignal-data.js</code> to enable live ETF and index prices.</span>
+          </div>
+        </div>
+        <div class="placeholder-grid" id="market-grid">
+          <!-- Populated by dashboard.js with placeholder tiles -->
+        </div>
+        <p class="placeholder-footnote">Tracked tickers: XBI &middot; IBB &middot; NBI &middot; LABU &middot; GNOM &middot; ARKG. Once live, also shows daily change, volume, and 52-week range.</p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────
+         SECTION 7: Patent Intelligence
+         (requires backend CORS proxy)
+    ─────────────────────────────────────────── -->
+    <section class="dash-section placeholder-section" id="patent-section">
+      <div class="container">
+        <div class="placeholder-banner">
+          <div class="placeholder-icon">&#9888;</div>
+          <div class="placeholder-text">
+            <strong>Requires Backend &mdash; CORS Proxy Needed</strong>
+            <span>Patent data from the <em>USPTO PatentsView API</em> and <em>EPO Open Patent Services</em> requires a server-side proxy because these APIs don't support browser CORS requests.</span>
+          </div>
+        </div>
+        <div class="ds-header" style="margin-top:24px;">
+          <div>
+            <div class="ds-badge placeholder-badge">Coming Soon &middot; Needs Backend</div>
+            <h2 class="ds-title" style="opacity:0.5;">Patent Intelligence</h2>
+            <p class="ds-sub" style="opacity:0.5;">Recent biotech patent filings, IP landscape analysis, and freedom-to-operate signals via USPTO PatentsView &amp; EPO OPS.</p>
+          </div>
+        </div>
+        <p class="placeholder-footnote">To enable: add a <code>/api/patents</code> route to a backend that proxies USPTO PatentsView (<code>api.patentsview.org</code>), then update <code>biosignal-data.js → ENDPOINTS.patents</code></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" style="margin-top:0;">
+    <div class="footer-bottom">
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <p style="font-size:0.78rem; color:var(--text-dark);">&copy; 2026 BioSignal &middot; <em>Data sourced from RSS feeds, OpenFDA, NCBI PubMed, ClinicalTrials.gov, and SEC EDGAR. Not financial or medical advice.</em></p>
+        <a href="index.html" class="btn btn-ghost btn-sm">&larr; Back to Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="biosignal-data.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
