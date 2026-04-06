@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioSignal — Science</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="container header-primary">
+      <a href="index.html" class="logo">Bio<span>Signal</span></a>
+      <!-- Global search bar -->
+      <div class="dash-search-wrap" style="max-width:380px; flex:1;">
+        <input
+          type="search"
+          id="hub-search"
+          class="dash-search"
+          placeholder="Search drugs, trials, research, companies…"
+          autocomplete="off"
+        />
+        <button class="search-btn" id="hub-search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <nav class="nav" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item nav-dropdown">
+          <a href="news.html" class="nav-link">News</a>
+          <div class="dropdown-menu">
+            <a href="news.html#biotech">Biotech</a>
+            <a href="news.html#pharma">Pharma</a>
+            <a href="news.html#fda">FDA</a>
+            <a href="news.html#approvals">Drug Approvals</a>
+            <a href="news.html#conferences">Conferences</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="companies.html" class="nav-link">Companies</a>
+          <div class="dropdown-menu">
+            <a href="companies.html#pipeline">Pipeline Tracker</a>
+            <a href="companies.html#sec">SEC Filings</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="market.html" class="nav-link">Market</a>
+          <div class="dropdown-menu">
+            <a href="market.html#overview">Overview</a>
+            <a href="market.html#funding">Funding</a>
+            <a href="market.html#ipo">IPO</a>
+            <a href="market.html#ma">M&A</a>
+            <a href="market.html#calendar">FDA Calendar</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="science.html" class="nav-link">Science</a>
+          <div class="dropdown-menu">
+            <a href="#drugs">Drugs</a>
+            <a href="#trials">Clinical Trials</a>
+            <a href="#research">Research</a>
+          </div>
+        </div>
+      </nav>
+      <a href="#newsletter" class="btn btn-primary btn-sm nav-cta">Subscribe Free</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
+  <div class="search-panel hidden" id="hub-search-panel">
+    <div class="container">
+      <div class="search-panel-header">
+        <h2>Results for &ldquo;<span id="hub-search-query"></span>&rdquo;</h2>
+        <button class="btn btn-ghost btn-sm" id="hub-search-close">&#10005; Clear</button>
+      </div>
+      <div class="search-tabs">
+        <button class="search-tab active" data-target="hs-news">News <span class="tab-count" id="hs-news-count">–</span></button>
+        <button class="search-tab" data-target="hs-fda">FDA <span class="tab-count" id="hs-fda-count">–</span></button>
+        <button class="search-tab" data-target="hs-trials">Trials <span class="tab-count" id="hs-trials-count">–</span></button>
+      </div>
+      <div id="hs-news"   class="search-results-pane"></div>
+      <div id="hs-fda"    class="search-results-pane hidden"></div>
+      <div id="hs-trials" class="search-results-pane hidden"></div>
+      <p style="margin-top:16px; font-size:.78rem; color:var(--text-dark);">
+        <a href="index.html" style="color:var(--accent);">Back to Home</a> for complete cross-source search including PubMed and SEC EDGAR.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SCIENCE PAGE CONTENT
+  ════════════════════════════════════════ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Scientific Intelligence</h1>
+      <p>Drugs, clinical trials, and research data</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DRUG DATABASE
+  ════════════════════════════════════════ -->
+  <section class="section" id="drugs">
+    <div class="container">
+      <div class="section-badge science-badge">Drug Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Drug Database</h2>
+        <a href="#drugs" class="view-all">Full drug database &rarr;</a>
+      </div>
+      <p class="section-sub">Comprehensive information on biotech drugs and therapies</p>
+
+      <!-- Drug search and filters -->
+      <div class="pill-row" id="drug-pills">
+        <button class="cat-pill active" data-category="all">All Drugs</button>
+        <button class="cat-pill" data-category="oncology">Oncology</button>
+        <button class="cat-pill" data-category="neurology">Neurology</button>
+        <button class="cat-pill" data-category="cardiology">Cardiology</button>
+        <button class="cat-pill" data-category="rare">Rare Diseases</button>
+      </div>
+
+      <!-- Drug cards — populated by science.js -->
+      <div class="news-grid" id="drugs-grid" style="grid-template-columns: repeat(auto-fill, minmax(320px,1fr));">
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CLINICAL TRIALS
+  ════════════════════════════════════════ -->
+  <section class="section" id="trials" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-badge trials-badge" style="background:rgba(103,232,249,.1); color:var(--trials); border:1px solid rgba(103,232,249,.2);">Clinical Trials</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Clinical Trials</h2>
+        <a href="#trials" class="view-all">Full trials database &rarr;</a>
+      </div>
+      <p class="section-sub">Active clinical trials in biotech and life sciences</p>
+
+      <!-- Trial filters -->
+      <div class="pill-row" id="trial-pills">
+        <button class="cat-pill active" data-phase="all">All Phases</button>
+        <button class="cat-pill" data-phase="phase1">Phase 1</button>
+        <button class="cat-pill" data-phase="phase2">Phase 2</button>
+        <button class="cat-pill" data-phase="phase3">Phase 3</button>
+        <button class="cat-pill" data-phase="recruiting">Recruiting</button>
+      </div>
+
+      <!-- Trial timeline — populated by science.js -->
+      <div class="trial-timeline" id="trials-list">
+        <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading trials...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       RESEARCH & PUBLICATIONS
+  ════════════════════════════════════════ -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-badge publications-badge">Research Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Research & Publications</h2>
+        <a href="#research" class="view-all">Full research database &rarr;</a>
+      </div>
+      <p class="section-sub">Latest scientific publications and research from PubMed</p>
+
+      <!-- Research filters -->
+      <div class="pill-row" id="research-pills">
+        <button class="cat-pill active" data-topic="all">All Topics</button>
+        <button class="cat-pill" data-topic="biotech">Biotech</button>
+        <button class="cat-pill" data-topic="genetics">Genetics</button>
+        <button class="cat-pill" data-topic="therapy">Therapies</button>
+        <button class="cat-pill" data-topic="clinical">Clinical</button>
+      </div>
+
+      <!-- Research strip — populated by science.js -->
+      <div class="pub-strip" id="research-strip">
+        <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading research...</div>
+      </div>
+    </div>
+  </section>
+
+  <script src="biosignal-data.js"></script>
+  <script src="app.js"></script>
+  <script src="science.js"></script>
+</body>
+</html>

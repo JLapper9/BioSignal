@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSignal Test</title>
+</head>
+<body>
+    <h1>BioSignal Module Test</h1>
+    <div id="test-results"></div>
+
+    <script src="biosignal-data.js"></script>
+    <script>
+        // Test that all functions are available
+        const results = document.getElementById('test-results');
+
+        function testFunction(name, fn) {
+            try {
+                if (typeof fn === 'function') {
+                    results.innerHTML += `<div style="color: green;">✓ ${name} function available</div>`;
+                } else {
+                    results.innerHTML += `<div style="color: red;">✗ ${name} not a function</div>`;
+                }
+            } catch (e) {
+                results.innerHTML += `<div style="color: red;">✗ ${name} error: ${e.message}</div>`;
+            }
+        }
+
+        setTimeout(() => {
+            if (window.BioSignal) {
+                results.innerHTML += '<h2>Testing BioSignal module functions:</h2>';
+
+                // Test existing functions
+                testFunction('loadNews', window.BioSignal.loadNews);
+                testFunction('loadFDA', window.BioSignal.loadFDA);
+                testFunction('loadPubMed', window.BioSignal.loadPubMed);
+                testFunction('loadTrials', window.BioSignal.loadTrials);
+                testFunction('loadSEC', window.BioSignal.loadSEC);
+
+                // Test new functions
+                testFunction('loadPipeline', window.BioSignal.loadPipeline);
+                testFunction('loadMarketStats', window.BioSignal.loadMarketStats);
+                testFunction('loadFundingRounds', window.BioSignal.loadFundingRounds);
+                testFunction('loadIPOs', window.BioSignal.loadIPOs);
+                testFunction('loadMADeals', window.BioSignal.loadMADeals);
+                testFunction('loadFDACalendar', window.BioSignal.loadFDACalendar);
+                testFunction('loadDrugs', window.BioSignal.loadDrugs);
+
+                results.innerHTML += '<h2>Testing data loading (placeholders):</h2>';
+
+                // Test calling functions (they should return placeholder data)
+                window.BioSignal.loadPipeline(5).then(data => {
+                    results.innerHTML += `<div style="color: green;">✓ loadPipeline returned ${data.length} items</div>`;
+                }).catch(e => {
+                    results.innerHTML += `<div style="color: red;">✗ loadPipeline error: ${e.message}</div>`;
+                });
+
+                window.BioSignal.loadMarketStats().then(data => {
+                    results.innerHTML += `<div style="color: green;">✓ loadMarketStats returned ${Object.keys(data).length} stats</div>`;
+                }).catch(e => {
+                    results.innerHTML += `<div style="color: red;">✗ loadMarketStats error: ${e.message}</div>`;
+                });
+
+            } else {
+                results.innerHTML += '<div style="color: red;">✗ window.BioSignal not found</div>';
+            }
+        }, 100);
+    </script>
+</body>
+</html>

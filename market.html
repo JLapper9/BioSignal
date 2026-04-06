@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioSignal — Market</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="container header-primary">
+      <a href="index.html" class="logo">Bio<span>Signal</span></a>
+      <!-- Global search bar -->
+      <div class="dash-search-wrap" style="max-width:380px; flex:1;">
+        <input
+          type="search"
+          id="hub-search"
+          class="dash-search"
+          placeholder="Search drugs, trials, research, companies…"
+          autocomplete="off"
+        />
+        <button class="search-btn" id="hub-search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <nav class="nav" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-item nav-dropdown">
+          <a href="news.html" class="nav-link">News</a>
+          <div class="dropdown-menu">
+            <a href="news.html#biotech">Biotech</a>
+            <a href="news.html#pharma">Pharma</a>
+            <a href="news.html#fda">FDA</a>
+            <a href="news.html#approvals">Drug Approvals</a>
+            <a href="news.html#conferences">Conferences</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="companies.html" class="nav-link">Companies</a>
+          <div class="dropdown-menu">
+            <a href="companies.html#pipeline">Pipeline Tracker</a>
+            <a href="companies.html#sec">SEC Filings</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="market.html" class="nav-link">Market</a>
+          <div class="dropdown-menu">
+            <a href="#overview">Overview</a>
+            <a href="#funding">Funding</a>
+            <a href="#ipo">IPO</a>
+            <a href="#ma">M&A</a>
+            <a href="#calendar">FDA Calendar</a>
+          </div>
+        </div>
+        <div class="nav-item nav-dropdown">
+          <a href="science.html" class="nav-link">Science</a>
+          <div class="dropdown-menu">
+            <a href="science.html#drugs">Drugs</a>
+            <a href="science.html#trials">Clinical Trials</a>
+            <a href="science.html#research">Research</a>
+          </div>
+        </div>
+      </nav>
+      <a href="#newsletter" class="btn btn-primary btn-sm nav-cta">Subscribe Free</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
+  <div class="search-panel hidden" id="hub-search-panel">
+    <div class="container">
+      <div class="search-panel-header">
+        <h2>Results for &ldquo;<span id="hub-search-query"></span>&rdquo;</h2>
+        <button class="btn btn-ghost btn-sm" id="hub-search-close">&#10005; Clear</button>
+      </div>
+      <div class="search-tabs">
+        <button class="search-tab active" data-target="hs-news">News <span class="tab-count" id="hs-news-count">–</span></button>
+        <button class="search-tab" data-target="hs-fda">FDA <span class="tab-count" id="hs-fda-count">–</span></button>
+        <button class="search-tab" data-target="hs-trials">Trials <span class="tab-count" id="hs-trials-count">–</span></button>
+      </div>
+      <div id="hs-news"   class="search-results-pane"></div>
+      <div id="hs-fda"    class="search-results-pane hidden"></div>
+      <div id="hs-trials" class="search-results-pane hidden"></div>
+      <p style="margin-top:16px; font-size:.78rem; color:var(--text-dark);">
+        <a href="index.html" style="color:var(--accent);">Back to Home</a> for complete cross-source search including PubMed and SEC EDGAR.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MARKET PAGE CONTENT
+  ════════════════════════════════════════ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Market Intelligence</h1>
+      <p>Biotech market overview, funding, IPOs, M&A, and FDA calendar</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARKET OVERVIEW
+  ════════════════════════════════════════ -->
+  <section class="section" id="overview">
+    <div class="container">
+      <div class="section-badge funding-badge">Market Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Market Overview</h2>
+        <a href="#overview" class="view-all">Full market dashboard &rarr;</a>
+      </div>
+      <p class="section-sub">Key biotech market indicators and trends</p>
+
+      <!-- Market stats grid -->
+      <div class="stats-grid" id="market-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="market-cap">$1.2T</div>
+          <div class="stat-label">Total Biotech Market Cap</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="companies-count">1,847</div>
+          <div class="stat-label">Public Biotech Companies</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="funding-ytd">$45.2B</div>
+          <div class="stat-label">Funding Raised YTD</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="ipos-qtr">23</div>
+          <div class="stat-label">IPOs This Quarter</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FUNDING ROUNDUP
+  ════════════════════════════════════════ -->
+  <section class="section" id="funding" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-badge funding-badge" style="background:rgba(250,204,21,.1); color:var(--funding-col); border:1px solid rgba(250,204,21,.2);">Funding Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Recent Funding Rounds</h2>
+        <a href="#funding" class="view-all">Full funding tracker &rarr;</a>
+      </div>
+      <p class="section-sub">Latest venture capital and private equity deals in biotech</p>
+
+      <!-- Funding cards — populated by market.js -->
+      <div class="funding-grid" id="funding-grid">
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       IPO TRACKER
+  ════════════════════════════════════════ -->
+  <section class="section" id="ipo">
+    <div class="container">
+      <div class="section-badge funding-badge">IPO Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Recent IPOs</h2>
+        <a href="#ipo" class="view-all">Full IPO tracker &rarr;</a>
+      </div>
+      <p class="section-sub">Biotech companies that went public recently</p>
+
+      <!-- IPO table -->
+      <div class="table-wrap">
+        <table class="pipeline-table ipo-table" id="ipo-table">
+          <thead>
+            <tr>
+              <th data-col="company">Company</th>
+              <th data-col="symbol">Symbol</th>
+              <th data-col="price">IPO Price</th>
+              <th data-col="current">Current</th>
+              <th data-col="change">Change</th>
+              <th data-col="date">IPO Date</th>
+              <th data-col="raised">Raised</th>
+            </tr>
+          </thead>
+          <tbody id="ipo-body">
+            <!-- IPO data populated by market.js -->
+            <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-dark);">Loading IPO data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       M&A ACTIVITY
+  ════════════════════════════════════════ -->
+  <section class="section" id="ma" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-badge companies-badge">M&A Intelligence</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Mergers & Acquisitions</h2>
+        <a href="#ma" class="view-all">Full M&A tracker &rarr;</a>
+      </div>
+      <p class="section-sub">Recent biotech mergers, acquisitions, and strategic partnerships</p>
+
+      <!-- M&A cards — populated by market.js -->
+      <div class="news-grid" id="ma-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px,1fr));">
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FDA CALENDAR
+  ════════════════════════════════════════ -->
+  <section class="section" id="calendar">
+    <div class="container">
+      <div class="section-badge regulatory-badge">FDA Calendar</div>
+      <div class="section-header-row">
+        <h2 class="section-title">Upcoming FDA Decisions</h2>
+        <a href="#calendar" class="view-all">Full FDA calendar &rarr;</a>
+      </div>
+      <p class="section-sub">Key PDUFA dates and regulatory milestones</p>
+
+      <!-- Calendar list — populated by market.js -->
+      <div class="calendar-list" id="fda-calendar">
+        <div style="text-align:center;padding:40px;color:var(--text-dark);">Loading FDA calendar...</div>
+      </div>
+    </div>
+  </section>
+
+  <script src="biosignal-data.js"></script>
+  <script src="app.js"></script>
+  <script src="market.js"></script>
+</body>
+</html>

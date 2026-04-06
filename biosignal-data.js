@@ -254,27 +254,169 @@
     return filings.slice(0, limit);
   }
 
-  /* ── Market Data (Placeholder) ──────────────────────────────── */
+  /* ── Pipeline Data (Placeholder) ───────────────────────────── */
 
-  function getMarketData() {
-    return {
-      isPlaceholder: true,
-      // ⚠️ TO ENABLE: Set ENDPOINTS.market above with your Alpha Vantage or Finnhub key
-      setupNote: 'Get a free key at alphavantage.co or finnhub.io, then set ENDPOINTS.market in biosignal-data.js',
-      etfs: [
-        { ticker: 'XBI',  name: 'SPDR S&P Biotech ETF',        price: null, change: null, range52w: '$64 – $102' },
-        { ticker: 'IBB',  name: 'iShares Nasdaq Biotech ETF',   price: null, change: null, range52w: '$128 – $181' },
-        { ticker: 'NBI',  name: 'NASDAQ Biotech Index',         price: null, change: null, range52w: '3,420 – 4,870' },
-        { ticker: 'LABU', name: 'Direxion Biotech Bull 3×',     price: null, change: null, range52w: '$14 – $48' },
-        { ticker: 'GNOM', name: 'Global X Genomics & Biotech',  price: null, change: null, range52w: '$10 – $18' },
-        { ticker: 'ARKG', name: 'ARK Genomic Revolution ETF',   price: null, change: null, range52w: '$12 – $22' },
-      ],
+  async function loadPipeline(limit) {
+    limit = limit || 25;
+    const key = 'pipeline';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder pipeline data - in a real app, this would come from a database or API
+    const pipeline = [
+      { company: 'Moderna', drug: 'mRNA-1273', indication: 'Respiratory Syncytial Virus', stage: 'Phase 3', moa: 'mRNA Vaccine', partners: '—', newsUrl: '#' },
+      { company: 'Pfizer', drug: 'PF-07321332', indication: 'COVID-19', stage: 'Approved', moa: 'Protease Inhibitor', partners: '—', newsUrl: '#' },
+      { company: 'Vertex', drug: 'VX-880', indication: 'Type 1 Diabetes', stage: 'Phase 1/2', moa: 'Stem Cell Therapy', partners: '—', newsUrl: '#' },
+      { company: 'CRISPR Therapeutics', drug: 'CTX001', indication: 'Sickle Cell Disease', stage: 'Phase 3', moa: 'CRISPR Gene Editing', partners: 'Vertex', newsUrl: '#' },
+      { company: 'Regeneron', drug: 'REGN-COV2', indication: 'COVID-19', stage: 'Approved', moa: 'Monoclonal Antibody', partners: '—', newsUrl: '#' },
+      { company: 'BioNTech', drug: 'BNT162b2', indication: 'COVID-19', stage: 'Approved', moa: 'mRNA Vaccine', partners: 'Pfizer', newsUrl: '#' },
+      { company: 'Gilead', drug: 'Remdesivir', indication: 'COVID-19', stage: 'Approved', moa: 'Antiviral', partners: '—', newsUrl: '#' },
+      { company: 'Novartis', drug: 'Zolgensma', indication: 'SMA', stage: 'Approved', moa: 'Gene Therapy', partners: '—', newsUrl: '#' },
+      { company: 'Roche', drug: 'Atezolizumab', indication: 'Cancer', stage: 'Approved', moa: 'PD-L1 Inhibitor', partners: 'Genentech', newsUrl: '#' },
+      { company: 'AstraZeneca', drug: 'Tagrisso', indication: 'NSCLC', stage: 'Approved', moa: 'EGFR Inhibitor', partners: '—', newsUrl: '#' },
+    ];
+
+    _set(key, pipeline);
+    return pipeline.slice(0, limit);
+  }
+
+  /* ── Market Stats (Placeholder) ─────────────────────────────── */
+
+  async function loadMarketStats() {
+    const key = 'market_stats';
+    const cached = _get(key);
+    if (cached) return cached;
+
+    // Placeholder market stats
+    const stats = {
+      marketCap: '$1.2T',
+      companiesCount: '1,847',
+      fundingYTD: '$45.2B',
+      iposQtr: '23'
     };
+
+    _set(key, stats);
+    return stats;
+  }
+
+  /* ── Funding Rounds (Placeholder) ───────────────────────────── */
+
+  async function loadFundingRounds(limit) {
+    limit = limit || 6;
+    const key = 'funding_rounds';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder funding data
+    const rounds = [
+      { company: 'Tempus AI', amount: '$200M', roundType: 'Series F', date: '2024-03-15', description: 'AI-powered healthcare analytics platform', url: '#' },
+      { company: 'Sana Biotechnology', amount: '$175M', roundType: 'Series C', date: '2024-03-10', description: 'Stem cell and gene therapy platform', url: '#' },
+      { company: 'Recursion Pharmaceuticals', amount: '$150M', roundType: 'Series E', date: '2024-03-08', description: 'AI-driven drug discovery', url: '#' },
+      { company: 'Ginkgo Bioworks', amount: '$125M', roundType: 'Series G', date: '2024-03-05', description: 'Synthetic biology platform', url: '#' },
+      { company: 'EQRx', amount: '$100M', roundType: 'Series C', date: '2024-03-01', description: 'Lower-cost drug development', url: '#' },
+      { company: 'Fate Therapeutics', amount: '$75M', roundType: 'PIPE', date: '2024-02-28', description: 'iPSC-derived cell therapies', url: '#' },
+    ];
+
+    _set(key, rounds);
+    return rounds.slice(0, limit);
+  }
+
+  /* ── IPO Tracker (Placeholder) ──────────────────────────────── */
+
+  async function loadIPOs(limit) {
+    limit = limit || 10;
+    const key = 'ipos';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder IPO data
+    const ipos = [
+      { company: 'Sientra', symbol: 'SIEN', ipoPrice: '$18.00', currentPrice: '$2.45', change: -86.39, ipoDate: '2024-03-20', raised: '$75M' },
+      { company: 'BioAtla', symbol: 'BCAB', ipoPrice: '$17.00', currentPrice: '$1.89', change: -88.88, ipoDate: '2024-03-15', raised: '$100M' },
+      { company: 'Cerevel Therapeutics', symbol: 'CERE', ipoPrice: '$18.00', currentPrice: '$42.50', change: 136.11, ipoDate: '2024-02-28', raised: '$200M' },
+      { company: 'Day One Biopharmaceuticals', symbol: 'DAWN', ipoPrice: '$16.00', currentPrice: '$14.25', change: -10.94, ipoDate: '2024-02-15', raised: '$125M' },
+      { company: 'Arcutis Biotherapeutics', symbol: 'ARQT', ipoPrice: '$17.00', currentPrice: '$8.75', change: -48.53, ipoDate: '2024-02-10', raised: '$150M' },
+    ];
+
+    _set(key, ipos);
+    return ipos.slice(0, limit);
+  }
+
+  /* ── M&A Deals (Placeholder) ────────────────────────────────── */
+
+  async function loadMADeals(limit) {
+    limit = limit || 6;
+    const key = 'ma_deals';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder M&A data
+    const deals = [
+      { title: 'AstraZeneca Acquires Gracell Biotechnologies', date: '2024-03-18', description: 'CAR-T cell therapy platform acquisition for $1.2B', value: '$1.2B', url: '#' },
+      { title: 'Bristol Myers Squibb to Acquire Karuna Therapeutics', date: '2024-03-10', description: 'Schizophrenia treatment acquisition for $14B', value: '$14B', url: '#' },
+      { title: 'Roche Acquires Telavant', date: '2024-03-05', description: 'Inflammatory bowel disease treatment for $7.1B', value: '$7.1B', url: '#' },
+      { title: 'Pfizer Acquires Seagen', date: '2024-03-01', description: 'Cancer therapy acquisition for $43B', value: '$43B', url: '#' },
+      { title: 'Merck Acquires Prometheus Biosciences', date: '2024-02-25', description: 'Inflammatory bowel disease therapies for $10.8B', value: '$10.8B', url: '#' },
+      { title: 'Eli Lilly Acquires Versanis Bio', date: '2024-02-20', description: 'Obesity and diabetes drug development for $1.9B', url: '#' },
+    ];
+
+    _set(key, deals);
+    return deals.slice(0, limit);
+  }
+
+  /* ── FDA Calendar (Placeholder) ─────────────────────────────── */
+
+  async function loadFDACalendar(limit) {
+    limit = limit || 10;
+    const key = 'fda_calendar';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder FDA calendar data
+    const events = [
+      { drug: 'Donanemab', company: 'Eli Lilly', eventType: 'PDUFA', date: '2024-04-15', event: 'Alzheimer\'s disease treatment' },
+      { drug: 'Jemperli', company: 'GSK', eventType: 'PDUFA', date: '2024-04-20', event: 'Endometrial cancer treatment' },
+      { drug: 'Vyvgart Hytrulo', company: 'Argenx', eventType: 'PDUFA', date: '2024-04-25', event: 'Myasthenia gravis treatment' },
+      { drug: 'Zurzuvae', company: 'Sage Therapeutics', eventType: 'PDUFA', date: '2024-05-05', event: 'Postpartum depression treatment' },
+      { drug: 'Rezdiffra', company: 'Madrigal Pharmaceuticals', eventType: 'PDUFA', date: '2024-05-10', event: 'NASH treatment' },
+      { drug: 'Zoryve', company: 'Arcutis Biotherapeutics', eventType: 'PDUFA', date: '2024-05-15', event: 'Psoriasis treatment' },
+      { drug: 'Daybue', company: 'Stoke Therapeutics', eventType: 'PDUFA', date: '2024-05-20', event: 'Dravet syndrome treatment' },
+      { drug: 'Elrexfio', company: 'Pfizer', eventType: 'PDUFA', date: '2024-05-25', event: 'Multiple myeloma treatment' },
+    ];
+
+    _set(key, events);
+    return events.slice(0, limit);
+  }
+
+  /* ── Drug Database (Placeholder) ────────────────────────────── */
+
+  async function loadDrugs(limit) {
+    limit = limit || 9;
+    const key = 'drugs';
+    const cached = _get(key);
+    if (cached) return cached.slice(0, limit);
+
+    // Placeholder drug data
+    const drugs = [
+      { name: 'Casgevy', company: 'Vertex/CRISPR Therapeutics', category: 'Rare Diseases', status: 'Approved', description: 'First CRISPR-based gene editing therapy for sickle cell disease', url: '#' },
+      { name: 'Leqembi', company: 'Eisai/Biogen', category: 'Neurology', status: 'Approved', description: 'Monoclonal antibody for Alzheimer\'s disease treatment', url: '#' },
+      { name: 'Jardiance', company: 'Boehringer Ingelheim/Eli Lilly', category: 'Cardiology', status: 'Approved', description: 'SGLT2 inhibitor for heart failure and type 2 diabetes', url: '#' },
+      { name: 'Keytruda', company: 'Merck', category: 'Oncology', status: 'Approved', description: 'PD-1 inhibitor for multiple cancer types', url: '#' },
+      { name: 'Humira', company: 'AbbVie', category: 'Immunology', status: 'Approved', description: 'TNF inhibitor for autoimmune diseases', url: '#' },
+      { name: 'Wegovy', company: 'Novo Nordisk', category: 'Cardiology', status: 'Approved', description: 'GLP-1 agonist for weight management and cardiovascular risk reduction', url: '#' },
+      { name: 'Opdivo', company: 'Bristol Myers Squibb', category: 'Oncology', status: 'Approved', description: 'PD-1 inhibitor for multiple cancer types', url: '#' },
+      { name: 'Stelara', company: 'Janssen', category: 'Immunology', status: 'Approved', description: 'IL-12/23 inhibitor for psoriasis and inflammatory bowel disease', url: '#' },
+      { name: 'Eliquis', company: 'Bristol Myers Squibb/Pfizer', category: 'Cardiology', status: 'Approved', description: 'Factor Xa inhibitor for stroke prevention and venous thromboembolism', url: '#' },
+    ];
+
+    _set(key, drugs);
+    return drugs.slice(0, limit);
   }
 
   /* ── Export ──────────────────────────────────────────────────── */
   window.BioSignal = {
-    loadNews, loadFDA, loadPubMed, loadTrials, loadSEC, getMarketData, clearCache,
+    loadNews, loadFDA, loadPubMed, loadTrials, loadSEC, clearCache,
+    loadPipeline, loadMarketStats, loadFundingRounds, loadIPOs, loadMADeals, loadFDACalendar, loadDrugs,
     formatDate, truncate, stripHtml, relativeTime,
     phaseClass, phaseLabel, trialStatusClass, trialStatusLabel,
     ENDPOINTS,

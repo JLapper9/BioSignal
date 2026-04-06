@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,923 +15,192 @@
   <header class="site-header">
     <div class="container header-primary">
       <a href="#" class="logo">Bio<span>Signal</span></a>
-      <!-- Global search bar -->
       <div class="dash-search-wrap" style="max-width:380px; flex:1;">
-        <input
-          type="search"
-          id="hub-search"
-          class="dash-search"
-          placeholder="Search drugs, trials, research, companies…"
-          autocomplete="off"
-        />
+        <input type="search" id="hub-search" class="dash-search" placeholder="Search drugs, trials, research, companies…" autocomplete="off" />
         <button class="search-btn" id="hub-search-btn" aria-label="Search">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
       </div>
       <nav class="nav" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
         <div class="nav-item nav-dropdown">
-          <a href="#news" class="nav-link">News</a>
+          <a href="news.html" class="nav-link">News</a>
           <div class="dropdown-menu">
-            <a href="#science-news">Biotech</a>
-            <a href="#science-news">Pharma</a>
-            <a href="#fda-spotlight">FDA</a>
-            <a href="#fda-spotlight">Drug Approvals</a>
-            <a href="#science">Conferences</a>
+            <a href="news.html#biotech">Biotech</a>
+            <a href="news.html#pharma">Pharma</a>
+            <a href="news.html#fda">FDA</a>
+            <a href="news.html#approvals">Drug Approvals</a>
+            <a href="news.html#conferences">Conferences</a>
           </div>
         </div>
         <div class="nav-item nav-dropdown">
-          <a href="#companies" class="nav-link">Companies</a>
+          <a href="companies.html" class="nav-link">Companies</a>
           <div class="dropdown-menu">
-            <a href="#companies">Pipeline Tracker</a>
-            <a href="#sec">SEC Filings</a>
+            <a href="companies.html#pipeline">Pipeline Tracker</a>
+            <a href="companies.html#sec">SEC Filings</a>
           </div>
         </div>
         <div class="nav-item nav-dropdown">
-          <a href="#investing" class="nav-link">Market</a>
+          <a href="market.html" class="nav-link">Market</a>
           <div class="dropdown-menu">
-            <a href="#investing">Overview</a>
-            <a href="#funding">Funding</a>
-            <a href="#ipos">IPO</a>
-            <a href="#investing">M&A</a>
-            <a href="#fda-calendar">FDA Calendar</a>
+            <a href="market.html#overview">Overview</a>
+            <a href="market.html#funding">Funding</a>
+            <a href="market.html#ipo">IPO</a>
+            <a href="market.html#ma">M&A</a>
+            <a href="market.html#calendar">FDA Calendar</a>
           </div>
         </div>
         <div class="nav-item nav-dropdown">
-          <a href="#science" class="nav-link">Science</a>
+          <a href="science.html" class="nav-link">Science</a>
           <div class="dropdown-menu">
-            <a href="#science">Drugs</a>
-            <a href="#science-trials">Clinical Trials</a>
-            <a href="#science-pubs">Research</a>
+            <a href="science.html#drugs">Drugs</a>
+            <a href="science.html#trials">Clinical Trials</a>
+            <a href="science.html#research">Research</a>
           </div>
         </div>
       </nav>
-      <a href="#newsletter" class="btn btn-primary btn-sm nav-cta">Subscribe Free</a>
+      <a href="#" class="btn btn-primary btn-sm nav-cta">Subscribe Free</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
     </div>
   </header>
 
-  <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
-  <div class="search-panel hidden" id="hub-search-panel">
+  <!-- ═══════════════════════════════════════
+       HOME PAGE CONTENT
+  ════════════════════════════════════════ -->
+  <section class="home-hero">
+    <div class="container home-hero-inner anim-in">
+      <span class="section-kicker">Biotech intelligence reimagined</span>
+      <h1 class="home-title">Unlock the signal in every biotech story.</h1>
+      <p class="home-tagline">A modern intelligence platform that blends regulatory, clinical, market, and company insights into one future-ready experience.</p>
+      <p class="home-sub">BioSignal helps scientists, investors, and strategy teams move faster by turning complex biotech data into clear, actionable insight.</p>
+      <div class="home-actions">
+        <a href="news.html" class="btn btn-primary">Explore News</a>
+        <a href="companies.html" class="btn btn-ghost">View Companies</a>
+      </div>
+      <div class="hero-tiles">
+        <div class="hero-tile anim-in">
+          <span class="tile-label">Live signals</span>
+          <h3>FDA, trials, and market movement</h3>
+          <p>Track the latest approvals, recalls, clinical updates, and market catalysts in one elegant hub.</p>
+        </div>
+        <div class="hero-tile anim-in">
+          <span class="tile-label">Pipeline intelligence</span>
+          <h3>Company programs with real momentum</h3>
+          <p>Spot key catalysts, stage shifts, and strategic moves across emerging and established biotech firms.</p>
+        </div>
+        <div class="hero-tile anim-in">
+          <span class="tile-label">Scientific context</span>
+          <h3>Research, publications, and evidence</h3>
+          <p>Connect clinical insights to the science behind every decision and identify signals earlier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section section-alt anim-in" id="about">
     <div class="container">
-      <div class="search-panel-header">
-        <h2>Results for &ldquo;<span id="hub-search-query"></span>&rdquo;</h2>
-        <button class="btn btn-ghost btn-sm" id="hub-search-close">&#10005; Clear</button>
+      <div class="section-head">
+        <span class="section-kicker">What we are</span>
+        <h2>A single source of biotech truth for the modern era.</h2>
+        <p class="section-lead">BioSignal is built to distill the noise across science, companies, and markets. We surface the right signals so you can act with certainty.</p>
       </div>
-      <div class="search-tabs">
-        <button class="search-tab active" data-target="hs-news">News <span class="tab-count" id="hs-news-count">–</span></button>
-        <button class="search-tab" data-target="hs-fda">FDA <span class="tab-count" id="hs-fda-count">–</span></button>
-        <button class="search-tab" data-target="hs-trials">Trials <span class="tab-count" id="hs-trials-count">–</span></button>
-      </div>
-      <div id="hs-news"   class="search-results-pane"></div>
-      <div id="hs-fda"    class="search-results-pane hidden"></div>
-      <div id="hs-trials" class="search-results-pane hidden"></div>
-      <p style="margin-top:16px; font-size:.78rem; color:var(--text-dark);">
-        <a href="#page-tabs" style="color:var(--accent);">Open full dashboard</a> for complete cross-source search including PubMed and SEC EDGAR.
-      </p>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       HERO
-  ════════════════════════════════════════ -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <p class="hero-label">Your Complete Biotech Intelligence Hub</p>
-      <h1>Science. Companies.<br />Investing. All in one place.</h1>
-      <p class="hero-sub">From groundbreaking research and pipeline milestones to funding rounds and FDA decisions — BioSignal is where biotech professionals start their day.</p>
-      <div class="hero-actions">
-        <a href="#page-tabs" class="btn btn-primary">&#9881; Live Dashboard</a>
-        <a href="#science"   class="btn btn-ghost">Science</a>
-        <a href="#companies" class="btn btn-ghost">Companies</a>
-        <a href="#investing" class="btn btn-ghost">Investing</a>
+      <div class="home-card-grid">
+        <article class="feature-card anim-in">
+          <span class="feature-badge">Insight</span>
+          <h3 class="feature-title">Contextualized intelligence</h3>
+          <p class="feature-desc">We combine regulatory activity, trial progress, company pipeline updates, and market commentary into a single, easy-to-navigate briefing.</p>
+        </article>
+        <article class="feature-card anim-in">
+          <span class="feature-badge">Clarity</span>
+          <h3 class="feature-title">Actionable signal streams</h3>
+          <p class="feature-desc">See which stories matter now, which catalysts are approaching, and where strategic risk is building in biotech portfolios.</p>
+        </article>
+        <article class="feature-card anim-in">
+          <span class="feature-badge">Speed</span>
+          <h3 class="feature-title">Faster decisions</h3>
+          <p class="feature-desc">Designed for fast-moving teams, BioSignal brings high-quality intelligence to your workflow without the noise.</p>
+        </article>
       </div>
     </div>
-    <div class="hero-bg-grid"></div>
   </section>
 
-  <section class="page-tabs-section" id="page-tabs">
+  <section class="home-section anim-in" id="mission">
     <div class="container">
-      <div class="page-tabs">
-        <button class="page-tab" data-page="overview">Overview</button>
-        <button class="page-tab active" data-page="news">News</button>
-        <button class="page-tab" data-page="fda">FDA</button>
-        <button class="page-tab" data-page="pipeline">Pipeline</button>
-        <button class="page-tab" data-page="sec">SEC Filings</button>
-        <button class="page-tab" data-page="investing">Investing</button>
+      <div class="section-head">
+        <span class="section-kicker">Our mission</span>
+        <h2>Help biotech leaders connect science and strategy.</h2>
+        <p class="section-lead">We exist to make biotech information intuitive and reliable, so your next move is backed by the best possible signal.</p>
+      </div>
+      <div class="home-goal-grid">
+        <div>
+          <p class="feature-desc">BioSignal is designed to be the intelligence layer between raw data and strategic insight. Whether you are evaluating a pipeline, assessing regulatory risk, or tracking scientific momentum, everything is surfaced in a coherent narrative.</p>
+          <div class="goal-list">
+            <div class="goal-item">
+              <span class="goal-dot"></span>
+              <p>Bring together corporate, clinical, regulatory, and market signals in one place.</p>
+            </div>
+            <div class="goal-item">
+              <span class="goal-dot"></span>
+              <p>Highlight the next catalysts and events that matter for biotech portfolios.</p>
+            </div>
+            <div class="goal-item">
+              <span class="goal-dot"></span>
+              <p>Simplify complex scientific and regulatory workflows for better decision-making.</p>
+            </div>
+          </div>
+        </div>
+        <div class="goal-highlight anim-in">
+          <h3>Focused on biotech, built for leaders.</h3>
+          <p>BioSignal blends curated data feeds and thoughtful storytelling so teams can discover opportunity faster and understand risk earlier.</p>
+          <ul class="goal-list" style="margin-top:24px;">
+            <li>Regulatory intel from FDA and safety databases</li>
+            <li>Clinical trial updates and milestone tracking</li>
+            <li>Market context for funding, IPOs, and M&A</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Ticker — populated with live RSS headlines by index.js -->
-  <div class="ticker-wrap">
-    <div class="ticker-track" id="ticker-track">
-      <span>Loading latest biotech headlines&hellip; &nbsp;&bull;&nbsp;</span>
-      <span>BioPharma Dive &middot; FierceBiotech &middot; Endpoints News &nbsp;&bull;&nbsp;</span>
-      <span>FDA &middot; ClinicalTrials &middot; PubMed &middot; SEC EDGAR &nbsp;&bull;&nbsp;</span>
-      <span>Loading latest biotech headlines&hellip; &nbsp;&bull;&nbsp;</span>
-    </div>
-  </div>
-
-  <!-- Pillar Jump Strip -->
-  <section class="pillar-strip">
-    <div class="container pillar-grid">
-      <a href="#science" class="pillar-card pillar-science">
-        <div class="pillar-icon">&#129514;</div>
-        <div class="pillar-text">
-          <h3>Science &amp; Research</h3>
-          <p>Live headlines from top biotech publications, PubMed research, and ClinicalTrials.gov — updated on every visit.</p>
-        </div>
-        <span class="pillar-arrow">&darr;</span>
-      </a>
-      <a href="#companies" class="pillar-card pillar-companies">
-        <div class="pillar-icon">&#127981;</div>
-        <div class="pillar-text">
-          <h3>Company Intelligence</h3>
-          <p>Pipeline tracker, company profiles, and live SEC EDGAR filings — IPOs, mergers, and major financial events.</p>
-        </div>
-        <span class="pillar-arrow">&darr;</span>
-      </a>
-      <a href="#investing" class="pillar-card pillar-investing">
-        <div class="pillar-icon">&#128200;</div>
-        <div class="pillar-text">
-          <h3>Biotech Investing</h3>
-          <p>FDA calendar, funding rounds, IPO tracker, and market data — all in one dashboard.</p>
-        </div>
-        <span class="pillar-arrow">&darr;</span>
-      </a>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       SCIENCE HUB — Live RSS + Trials + PubMed
-  ════════════════════════════════════════ -->
-  <section class="section section-science page-pane" data-page="news" id="science">
+  <section class="home-section section-alt anim-in" id="audience">
     <div class="container">
-      <div class="section-badge science-badge">Science &amp; Research</div>
-      <div class="section-header-row">
-        <h2 class="section-title">Latest in Biotech Science</h2>
-        <a href="#science" class="view-all">View all headlines &rarr;</a>
+      <div class="section-head">
+        <span class="section-kicker">Who it’s for</span>
+        <h2>Built for every team that moves biotech forward.</h2>
       </div>
-
-      <!-- News topic filter pills -->
-      <div class="pill-row" id="hub-rss-pills">
-        <button class="cat-pill active" data-topic="all">All Topics</button>
-        <button class="cat-pill" data-topic="biotech">Biotech</button>
-        <button class="cat-pill" data-topic="fda">FDA</button>
-        <button class="cat-pill" data-topic="pharma">Pharma</button>
-        <button class="cat-pill" data-topic="trials">Clinical Trials</button>
+      <div class="audience-grid">
+        <article class="audience-card anim-in">
+          <h3>Investors & analysts</h3>
+          <p>Monitor catalysts, compare pipelines, and evaluate regulatory risk across portfolios with real-time context.</p>
+        </article>
+        <article class="audience-card anim-in">
+          <h3>R&D teams</h3>
+          <p>Track progress in the clinic, identify competitive biology, and stay ahead of approvals and trial updates.</p>
+        </article>
+        <article class="audience-card anim-in">
+          <h3>Corporate strategy</h3>
+          <p>Align M&A, funding, and regulatory intelligence into executive-ready insight for planning and partnerships.</p>
+        </article>
+        <article class="audience-card anim-in">
+          <h3>Medical affairs</h3>
+          <p>Surface publications, safety signals, and clinical developments that shape evidence strategy and communication.</p>
+        </article>
       </div>
-
-      <!-- Two-col: live news + live trial sidebar -->
-      <div class="two-col-layout" id="science-news">
-
-        <!-- Live RSS news cards — populated by index.js -->
-        <div class="news-grid science-grid" id="hub-rss-grid">
-          <!-- Loading state -->
-          <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-          <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-          <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        </div>
-
-        <!-- Live Clinical Trials sidebar — populated by index.js -->
-        <div class="sidebar" id="science-trials">
-          <h3 class="sidebar-title">Clinical Trial Updates</h3>
-          <div class="trial-timeline" id="hub-trials-list">
-            <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading trials&hellip;</div>
-          </div>
-          <a href="#science" class="view-all" style="margin-top:16px; display:inline-block;">Full trial tracker &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Live PubMed Research Strip — populated by index.js -->
-      <div class="subsection-label" id="science-pubs">Latest Research &amp; Publications</div>
-      <div class="pub-strip" id="hub-pubmed-strip">
-        <div style="color:var(--text-dark);font-size:.85rem;padding:12px 0;">Loading research&hellip;</div>
-      </div>
-      <div style="text-align:right; margin-top:8px;">
-        <a href="#science" class="view-all">All PubMed research &rarr;</a>
-      </div>
-
     </div>
   </section>
 
-
-  <!-- ═══════════════════════════════════════
-       FDA SPOTLIGHT — Live OpenFDA
-  ════════════════════════════════════════ -->
-  <section class="section page-pane" data-page="fda" id="fda-spotlight" style="background:var(--bg-card3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <section class="home-section home-cta anim-in">
     <div class="container">
-      <div class="section-badge regulatory-badge" style="background:rgba(248,113,113,.1); color:var(--oncology); border:1px solid rgba(248,113,113,.2);">FDA Intelligence &middot; OpenFDA</div>
-      <div class="section-header-row">
-        <h2 class="section-title">FDA Spotlight</h2>
-        <a href="#fda-spotlight" class="view-all">Full FDA dashboard &rarr;</a>
-      </div>
-      <p class="section-sub">Recent drug approvals, safety recalls, and regulatory decisions — live from api.fda.gov</p>
-
-      <!-- FDA sub-filter pills -->
-      <div class="pill-row" id="hub-fda-pills">
-        <button class="cat-pill active" data-fdatab="approvals">Drug Approvals</button>
-        <button class="cat-pill" data-fdatab="recalls">Safety Recalls</button>
-      </div>
-
-      <!-- Live FDA cards — populated by index.js -->
-      <div class="news-grid" id="hub-fda-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px,1fr));">
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
+      <div class="cta-panel">
+        <h2>See how BioSignal turns biotech complexity into clarity.</h2>
+        <p>Start with the intelligence you need today, then explore the dedicated pages for news, pipeline, market, and science analysis.</p>
+        <div class="home-actions">
+          <a href="science.html" class="btn btn-primary">Explore Science</a>
+          <a href="market.html" class="btn btn-ghost">Explore Market</a>
+        </div>
       </div>
     </div>
   </section>
-
-
-  <!-- ═══════════════════════════════════════
-       COMPANY INTELLIGENCE
-  ════════════════════════════════════════ -->
-  <section class="section section-companies page-pane" data-page="pipeline" id="companies">
-    <div class="container">
-      <div class="section-badge companies-badge">Company Intelligence</div>
-      <div class="section-header-row">
-        <h2 class="section-title">Pipeline Tracker</h2>
-        <a href="#" class="view-all">Full pipeline database &rarr;</a>
-      </div>
-      <p class="section-sub">Key programs across the pipeline — track stage, indication, and upcoming catalysts.</p>
-
-      <!-- Stage filter -->
-      <div class="pill-row" id="stage-pills">
-        <button class="cat-pill active" data-stage="all">All Stages</button>
-        <button class="cat-pill" data-stage="phase1">Phase I</button>
-        <button class="cat-pill" data-stage="phase2">Phase II</button>
-        <button class="cat-pill" data-stage="phase3">Phase III</button>
-        <button class="cat-pill" data-stage="regulatory">Regulatory</button>
-      </div>
-
-      <!-- Pipeline table -->
-      <div class="table-wrap" id="pipeline">
-        <table class="pipeline-table" id="pipeline-table">
-          <thead>
-            <tr>
-              <th data-col="company">Company <span class="sort-icon">&#8597;</span></th>
-              <th data-col="drug">Drug / Program <span class="sort-icon">&#8597;</span></th>
-              <th data-col="indication">Indication <span class="sort-icon">&#8597;</span></th>
-              <th data-col="phase">Phase</th>
-              <th data-col="catalyst">Next Catalyst <span class="sort-icon">&#8597;</span></th>
-              <th data-col="status">Status</th>
-            </tr>
-          </thead>
-          <tbody id="pipeline-body">
-            <tr data-stage="phase3">
-              <td class="td-company">Intellia Therapeutics <span class="ticker-sym">NTLA</span></td>
-              <td class="td-drug">NTLA-2002</td>
-              <td>Hereditary Angioedema</td>
-              <td><div class="phase-pips" data-phase="3"><span></span><span></span><span></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-09-15">Sep 2026 Data <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="phase3">
-              <td class="td-company">Moderna <span class="ticker-sym">MRNA</span></td>
-              <td class="td-drug">mRNA-4157 + Keytruda</td>
-              <td>Melanoma (Adjuvant)</td>
-              <td><div class="phase-pips" data-phase="3"><span></span><span></span><span></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-06-01">Jun 2026 Filing <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="regulatory">
-              <td class="td-company">Vertex <span class="ticker-sym">VRTX</span></td>
-              <td class="td-drug">Suzetrigine</td>
-              <td>Acute Pain (Nav1.8)</td>
-              <td><div class="phase-pips" data-phase="4"><span></span><span></span><span></span><span></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-04-18">Apr 18 PDUFA <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-watch">PDUFA Soon</span></td>
-            </tr>
-            <tr data-stage="phase3">
-              <td class="td-company">Roche <span class="ticker-sym">RHHBY</span></td>
-              <td class="td-drug">Semorinemab</td>
-              <td>Early Alzheimer's</td>
-              <td><div class="phase-pips" data-phase="3"><span></span><span></span><span></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-07-20">Jul 2026 Results <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="phase2">
-              <td class="td-company">BioNTech <span class="ticker-sym">BNTX</span></td>
-              <td class="td-drug">BNT323 (ADC)</td>
-              <td>HER2+ Solid Tumors</td>
-              <td><div class="phase-pips" data-phase="2"><span></span><span></span><span class="empty"></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-10-01">Oct 2026 Data <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="phase2">
-              <td class="td-company">Karuna Therapeutics <span class="ticker-sym">KRTX</span></td>
-              <td class="td-drug">KarXT</td>
-              <td>Schizophrenia</td>
-              <td><div class="phase-pips" data-phase="2"><span></span><span></span><span class="empty"></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-08-10">Aug 2026 Data <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="phase1">
-              <td class="td-company">Beam Therapeutics <span class="ticker-sym">BEAM</span></td>
-              <td class="td-drug">BEAM-101</td>
-              <td>Sickle Cell Disease</td>
-              <td><div class="phase-pips" data-phase="1"><span></span><span class="empty"></span><span class="empty"></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip" data-pdufa="2026-12-01">Dec 2026 Interim <span class="countdown-label"></span></div></td>
-              <td><span class="status-pill status-active">Active</span></td>
-            </tr>
-            <tr data-stage="phase2">
-              <td class="td-company">Abata Therapeutics <span class="ticker-sym">Private</span></td>
-              <td class="td-drug">AB-101</td>
-              <td>Progressive MS</td>
-              <td><div class="phase-pips" data-phase="2"><span></span><span></span><span class="empty"></span><span class="empty"></span></div></td>
-              <td><div class="catalyst-chip">TBD — Safety Review</div></td>
-              <td><span class="status-pill status-halted">Paused</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Company Profile Cards -->
-      <div class="section-header-row" style="margin-top:56px;" id="company-cards">
-        <h2 class="section-title">Companies to Watch</h2>
-        <a href="#" class="view-all">All profiles &rarr;</a>
-      </div>
-
-      <div class="pill-row" id="company-stage-pills">
-        <button class="cat-pill active" data-stage="all">All</button>
-        <button class="cat-pill" data-stage="early">Early Stage</button>
-        <button class="cat-pill" data-stage="mid">Mid Stage</button>
-        <button class="cat-pill" data-stage="late">Late Stage</button>
-      </div>
-
-      <div class="scroll-strip" id="company-strip">
-
-        <div class="company-card" data-stage="late">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Intellia Therapeutics</div>
-              <div class="company-ticker">NTLA &middot; NASDAQ</div>
-            </div>
-            <span class="cat-badge genomics">Genomics</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2014</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>6</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase III</span>
-          </div>
-          <p class="company-desc">Leader in in vivo CRISPR gene editing. NTLA-2002 in Phase III for HAE with potential for curative single-dose therapy. Multiple liver-directed programs in IND-enabling studies.</p>
-          <div class="company-catalyst">Next catalyst: <strong>Sep 2026 Phase III data</strong></div>
-        </div>
-
-        <div class="company-card" data-stage="late">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Beam Therapeutics</div>
-              <div class="company-ticker">BEAM &middot; NASDAQ</div>
-            </div>
-            <span class="cat-badge genomics">Genomics</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2017</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>8</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase I/II</span>
-          </div>
-          <p class="company-desc">Pioneering base editing and prime editing for genetic diseases. BEAM-101 showing early signal in sickle cell. Broad portfolio spanning haematology, liver disease, and oncology.</p>
-          <div class="company-catalyst">Next catalyst: <strong>Dec 2026 interim data</strong></div>
-        </div>
-
-        <div class="company-card" data-stage="mid">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Relay Therapeutics</div>
-              <div class="company-ticker">RLAY &middot; NASDAQ</div>
-            </div>
-            <span class="cat-badge oncology">Oncology</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2016</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>5</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase II</span>
-          </div>
-          <p class="company-desc">Motion-based drug design platform targeting conformational flexibility of proteins. Lead PI3Kα mutant inhibitor (RLY-2608) showing differentiated efficacy vs. alpelisib in breast cancer.</p>
-          <div class="company-catalyst">Next catalyst: <strong>H2 2026 Phase II update</strong></div>
-        </div>
-
-        <div class="company-card" data-stage="early">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Recursion Pharmaceuticals</div>
-              <div class="company-ticker">RXRX &middot; NASDAQ</div>
-            </div>
-            <span class="cat-badge regulatory">AI-Bio</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2013</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>10+</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase I/II</span>
-          </div>
-          <p class="company-desc">AI-native drug discovery using phenomics and foundation models. Partners with Nvidia and Bayer. Growing pipeline of AI-generated NMEs entering first-in-human studies across rare diseases.</p>
-          <div class="company-catalyst">Next catalyst: <strong>Q3 2026 Phase I results</strong></div>
-        </div>
-
-        <div class="company-card" data-stage="mid">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Protagonist Therapeutics</div>
-              <div class="company-ticker">PTGX &middot; NASDAQ</div>
-            </div>
-            <span class="cat-badge immunology">Immunology</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2006</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>4</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase II/III</span>
-          </div>
-          <p class="company-desc">Peptide-based medicines for blood and GI disorders. Rusfertide (hepcidin mimetic) in Phase III for polycythemia vera with a clean safety profile vs. ruxolitinib.</p>
-          <div class="company-catalyst">Next catalyst: <strong>H1 2026 pivotal readout</strong></div>
-        </div>
-
-        <div class="company-card" data-stage="early">
-          <div class="company-card-top">
-            <div>
-              <div class="company-name">Entry Therapeutics</div>
-              <div class="company-ticker">Private</div>
-            </div>
-            <span class="cat-badge cns">CNS</span>
-          </div>
-          <div class="company-meta-row">
-            <span class="company-meta-item"><span class="meta-label">Founded</span>2021</span>
-            <span class="company-meta-item"><span class="meta-label">Programs</span>3</span>
-            <span class="company-meta-item"><span class="meta-label">Stage</span>Phase I</span>
-          </div>
-          <p class="company-desc">Targeting neuroinflammation via microglial reprogramming. Lead compound ET-101 entering IND with $120M Series B. Compelling preclinical data in ALS and frontotemporal dementia models.</p>
-          <div class="company-catalyst">Next catalyst: <strong>Q4 2026 Phase I initiation</strong></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-companies page-pane" data-page="sec" id="sec">
-    <div class="container">
-      <div class="section-header-row" style="margin-top:0;" id="sec-activity">
-        <h2 class="section-title">SEC Filings Activity</h2>
-        <a href="#sec" class="view-all">All SEC filings &rarr;</a>
-      </div>
-      <p class="section-sub">Recent 10-K, 10-Q, 8-K, and S-1 filings from biotech and pharma companies via SEC EDGAR. IPOs and major events highlighted.</p>
-
-      <div class="news-grid" id="hub-sec-grid" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); margin-top:20px;">
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       INVESTING DASHBOARD
-  ════════════════════════════════════════ -->
-      <div class="section-header-row" style="margin-top:56px;" id="sec-activity">
-        <h2 class="section-title">SEC Filings Activity</h2>
-          <a href="#sec" class="view-all">All SEC filings &rarr;</a>
-      </div>
-      <p class="section-sub">Recent 10-K, 10-Q, 8-K, and S-1 filings from biotech and pharma companies via SEC EDGAR. IPOs and major events highlighted.</p>
-
-      <!-- Live SEC cards — populated by index.js -->
-      <div class="news-grid" id="hub-sec-grid" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); margin-top:20px;">
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-        <div class="skeleton-card"><div class="skel skel-sm"></div><div class="skel skel-md"></div><div class="skel skel-lg"></div><div class="skel skel-p"></div></div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       INVESTING DASHBOARD
-  ════════════════════════════════════════ -->
-  <section class="section section-investing page-pane" data-page="investing" id="investing">
-    <div class="container">
-      <div class="section-badge investing-badge">Investing Dashboard</div>
-      <h2 class="section-title">Biotech Market &amp; Deal Intelligence</h2>
-      <p class="section-sub">Market indices, FDA catalysts, funding activity, and IPO performance — updated daily.</p>
-
-      <!-- Market Tiles
-           ⚠️ PLACEHOLDER — prices are static. Connect Alpha Vantage or Finnhub in biosignal-data.js to enable live data. -->
-      <div class="market-tiles" id="market">
-        <div class="market-tile" data-change="+0">
-          <div class="tile-ticker">XBI — SPDR S&P Biotech ETF</div>
-          <div class="tile-price" style="color:var(--text-dark);">— —</div>
-          <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: $64 – $102 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
-        </div>
-        <div class="market-tile" data-change="+0">
-          <div class="tile-ticker">IBB — iShares Biotech ETF</div>
-          <div class="tile-price" style="color:var(--text-dark);">— —</div>
-          <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: $128 – $181 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
-        </div>
-        <div class="market-tile" data-change="+0">
-          <div class="tile-ticker">NBI — NASDAQ Biotech Index</div>
-          <div class="tile-price" style="color:var(--text-dark);">— —</div>
-          <div class="tile-change" style="color:var(--text-dark); font-size:.72rem;">&#9888; Live data requires API key</div>
-          <div class="tile-note">52W Range: 3,420 – 4,870 &middot; <a href="#investing" style="color:var(--accent);font-size:.7rem;">Setup →</a></div>
-        </div>
-        <div class="market-tile market-tile-deals">
-          <div class="tile-ticker">Deal Volume — Q1 2026</div>
-          <div class="tile-price">$12.4B</div>
-          <div class="tile-change positive">&#9650; +34% vs Q1 2025</div>
-          <div class="tile-note">218 deals &middot; 14 IPOs &middot; 9 M&amp;A</div>
-        </div>
-      </div>
-
-      <!-- FDA Calendar + Funding split -->
-      <div class="dashboard-split">
-
-        <!-- FDA Calendar -->
-        <div class="fda-calendar-wrap" id="fda-calendar">
-          <h3 class="subsection-title">FDA Catalyst Calendar</h3>
-          <p class="subsection-sub">Upcoming PDUFA dates and advisory committee meetings</p>
-          <div class="fda-list">
-
-            <div class="fda-entry" data-pdufa="2026-04-18">
-              <div class="date-block">
-                <span class="date-month">APR</span>
-                <span class="date-day">18</span>
-              </div>
-              <div class="fda-entry-body">
-                <div class="fda-drug">Suzetrigine <span class="fda-company">Vertex</span></div>
-                <div class="fda-indication">Acute &amp; Neuropathic Pain (Nav1.8 inhibitor)</div>
-                <div class="fda-type-row"><span class="fda-type-badge pdufa">PDUFA</span><span class="countdown-label fda-countdown"></span></div>
-              </div>
-            </div>
-
-            <div class="fda-entry" data-pdufa="2026-05-06">
-              <div class="date-block">
-                <span class="date-month">MAY</span>
-                <span class="date-day">6</span>
-              </div>
-              <div class="fda-entry-body">
-                <div class="fda-drug">Imetelstat <span class="fda-company">Geron</span></div>
-                <div class="fda-indication">Myelodysplastic Syndrome (Telomerase inhibitor)</div>
-                <div class="fda-type-row"><span class="fda-type-badge pdufa">PDUFA</span><span class="countdown-label fda-countdown"></span></div>
-              </div>
-            </div>
-
-            <div class="fda-entry" data-pdufa="2026-05-22">
-              <div class="date-block">
-                <span class="date-month">MAY</span>
-                <span class="date-day">22</span>
-              </div>
-              <div class="fda-entry-body">
-                <div class="fda-drug">Linvoseltamab <span class="fda-company">Regeneron</span></div>
-                <div class="fda-indication">Relapsed/Refractory Multiple Myeloma (BCMA BiTE)</div>
-                <div class="fda-type-row"><span class="fda-type-badge adcom">AdCom</span><span class="countdown-label fda-countdown"></span></div>
-              </div>
-            </div>
-
-            <div class="fda-entry" data-pdufa="2026-07-14">
-              <div class="date-block">
-                <span class="date-month">JUL</span>
-                <span class="date-day">14</span>
-              </div>
-              <div class="fda-entry-body">
-                <div class="fda-drug">Semaglutide oral 25mg <span class="fda-company">Novo Nordisk</span></div>
-                <div class="fda-indication">Obesity / Type 2 Diabetes</div>
-                <div class="fda-type-row"><span class="fda-type-badge pdufa">PDUFA</span><span class="countdown-label fda-countdown"></span></div>
-              </div>
-            </div>
-
-            <div class="fda-entry" data-pdufa="2026-09-03">
-              <div class="date-block">
-                <span class="date-month">SEP</span>
-                <span class="date-day">3</span>
-              </div>
-              <div class="fda-entry-body">
-                <div class="fda-drug">Dato-DXd <span class="fda-company">AstraZeneca / Daiichi</span></div>
-                <div class="fda-indication">HR+ HER2-low Breast Cancer (ADC)</div>
-                <div class="fda-type-row"><span class="fda-type-badge pdufa">PDUFA</span><span class="countdown-label fda-countdown"></span></div>
-              </div>
-            </div>
-
-          </div>
-          <a href="#fda-spotlight" class="view-all" style="margin-top:12px; display:inline-block;">Full FDA dashboard &rarr;</a>
-        </div>
-
-        <!-- Funding Rounds -->
-        <div id="funding">
-          <h3 class="subsection-title">Recent Funding Rounds</h3>
-          <p class="subsection-sub">VC, Series, and strategic rounds from the past 30 days</p>
-          <div class="funding-feed">
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Aurelia Therapeutics</div>
-                <span class="round-badge series-b">Series B</span>
-              </div>
-              <div class="funding-amount">$380M</div>
-              <div class="funding-meta">Lead: a16z Bio &middot; Oncology &middot; Mar 30</div>
-            </div>
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Escient Pharmaceuticals</div>
-                <span class="round-badge series-c">Series C</span>
-              </div>
-              <div class="funding-amount">$215M</div>
-              <div class="funding-meta">Lead: RA Capital &middot; Immunology &middot; Mar 28</div>
-            </div>
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Nuvation Bio</div>
-                <span class="round-badge pipe">PIPE</span>
-              </div>
-              <div class="funding-amount">$175M</div>
-              <div class="funding-meta">Institutional &middot; Oncology &middot; Mar 25</div>
-            </div>
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Entry Therapeutics</div>
-                <span class="round-badge series-b">Series B</span>
-              </div>
-              <div class="funding-amount">$120M</div>
-              <div class="funding-meta">Lead: Foresite Capital &middot; CNS &middot; Mar 22</div>
-            </div>
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Bioatla</div>
-                <span class="round-badge series-a">Series A</span>
-              </div>
-              <div class="funding-amount">$95M</div>
-              <div class="funding-meta">Lead: OrbiMed &middot; Oncology &middot; Mar 18</div>
-            </div>
-
-            <div class="funding-entry">
-              <div class="funding-header">
-                <div class="funding-company">Aravive</div>
-                <span class="round-badge series-a">Series A</span>
-              </div>
-              <div class="funding-amount">$78M</div>
-              <div class="funding-meta">Lead: Deerfield &middot; Rare Disease &middot; Mar 15</div>
-            </div>
-
-          </div>
-          <a href="#" class="view-all" style="margin-top:12px; display:inline-block;">All funding rounds &rarr;</a>
-        </div>
-      </div>
-
-      <!-- IPO Tracker -->
-      <h3 class="subsection-title" style="margin-top:56px;" id="ipos">IPO Tracker — 2026</h3>
-      <p class="subsection-sub">Recent and upcoming biotech IPOs with post-IPO performance</p>
-      <div class="table-wrap">
-        <table class="pipeline-table ipo-table">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Ticker</th>
-              <th>Offer Price</th>
-              <th>Current</th>
-              <th>Change</th>
-              <th>IPO Date</th>
-              <th>Raised</th>
-              <th>Focus Area</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="td-company">Mirador Therapeutics</td>
-              <td class="ticker-sym">MRDR</td>
-              <td>$18.00</td>
-              <td>$24.30</td>
-              <td class="positive">&#9650; +35%</td>
-              <td>Mar 14</td>
-              <td>$250M</td>
-              <td><span class="cat-badge immunology">Immunology</span></td>
-            </tr>
-            <tr>
-              <td class="td-company">Rapport Therapeutics</td>
-              <td class="ticker-sym">RAPP</td>
-              <td>$20.00</td>
-              <td>$18.75</td>
-              <td class="negative">&#9660; -6.3%</td>
-              <td>Mar 7</td>
-              <td>$200M</td>
-              <td><span class="cat-badge cns">CNS</span></td>
-            </tr>
-            <tr>
-              <td class="td-company">Upstream Bio</td>
-              <td class="ticker-sym">UPB</td>
-              <td>$16.00</td>
-              <td>$21.50</td>
-              <td class="positive">&#9650; +34.4%</td>
-              <td>Feb 28</td>
-              <td>$192M</td>
-              <td><span class="cat-badge immunology">Immunology</span></td>
-            </tr>
-            <tr>
-              <td class="td-company">BioAtla</td>
-              <td class="ticker-sym">BCAB</td>
-              <td>$15.00</td>
-              <td>$12.80</td>
-              <td class="negative">&#9660; -14.7%</td>
-              <td>Feb 14</td>
-              <td>$150M</td>
-              <td><span class="cat-badge oncology">Oncology</span></td>
-            </tr>
-            <tr>
-              <td class="td-company">Vividion Therapeutics</td>
-              <td class="ticker-sym">VIVD</td>
-              <td>$22.00</td>
-              <td>$28.90</td>
-              <td class="positive">&#9650; +31.4%</td>
-              <td>Jan 30</td>
-              <td>$300M</td>
-              <td><span class="cat-badge oncology">Oncology</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- VC Heatmap -->
-      <h3 class="subsection-title" style="margin-top:48px;">VC Activity by Therapeutic Area — Q1 2026</h3>
-      <p class="subsection-sub">Deal frequency by area (darker = more activity)</p>
-      <div class="heatmap-wrap">
-        <div class="heatmap-labels">
-          <span>Jan</span><span>Feb</span><span>Mar</span>
-        </div>
-        <div class="heatmap-grid">
-          <div class="heatmap-row">
-            <span class="heatmap-label">Oncology</span>
-            <div class="heatmap-cell" data-intensity="0.9" title="Oncology — Jan: 28 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.8" title="Oncology — Feb: 24 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.95" title="Oncology — Mar: 31 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">CNS</span>
-            <div class="heatmap-cell" data-intensity="0.6" title="CNS — Jan: 14 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.7" title="CNS — Feb: 18 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.65" title="CNS — Mar: 16 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">Immunology</span>
-            <div class="heatmap-cell" data-intensity="0.75" title="Immunology — Jan: 20 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.8" title="Immunology — Feb: 22 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.85" title="Immunology — Mar: 25 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">Genomics</span>
-            <div class="heatmap-cell" data-intensity="0.5" title="Genomics — Jan: 10 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.55" title="Genomics — Feb: 12 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.6" title="Genomics — Mar: 14 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">Rare Disease</span>
-            <div class="heatmap-cell" data-intensity="0.4" title="Rare — Jan: 8 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.45" title="Rare — Feb: 9 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.55" title="Rare — Mar: 12 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">Metabolic</span>
-            <div class="heatmap-cell" data-intensity="0.7" title="Metabolic — Jan: 18 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.65" title="Metabolic — Feb: 16 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.75" title="Metabolic — Mar: 20 deals"></div>
-          </div>
-          <div class="heatmap-row">
-            <span class="heatmap-label">Ag-Bio</span>
-            <div class="heatmap-cell" data-intensity="0.2" title="Ag-Bio — Jan: 4 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.25" title="Ag-Bio — Feb: 5 deals"></div>
-            <div class="heatmap-cell" data-intensity="0.3" title="Ag-Bio — Mar: 6 deals"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       STATS BAR
-  ════════════════════════════════════════ -->
-  <section class="stats-bar">
-    <div class="container stats-inner">
-      <div class="stat">
-        <span class="stat-number">2,400+</span>
-        <span class="stat-label">Articles Published</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">380+</span>
-        <span class="stat-label">Companies Tracked</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">94K</span>
-        <span class="stat-label">Subscribers</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">120+</span>
-        <span class="stat-label">Pipelines Monitored</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">Daily</span>
-        <span class="stat-label">FDA Calendar Updates</span>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       NEWSLETTER
-  ════════════════════════════════════════ -->
-  <section class="newsletter section" id="newsletter">
-    <div class="container newsletter-inner">
-      <div class="newsletter-text">
-        <h2>Stay ahead of the science, the pipelines, and the deals</h2>
-        <p>Get the most important biotech stories, catalyst alerts, and funding news delivered every morning. No noise, no paywalls.</p>
-        <ul class="newsletter-perks">
-          <li>Daily briefing — science, companies, and investing in 5 minutes</li>
-          <li>PDUFA alerts the week before each FDA decision</li>
-          <li>Funding round summaries every Friday</li>
-          <li>Clinical trial updates as they happen</li>
-          <li>IPO watch list with our analyst takes</li>
-        </ul>
-      </div>
-      <form class="newsletter-form" onsubmit="handleSubscribe(event)">
-        <label for="email">Email address</label>
-        <input type="email" id="email" placeholder="you@company.com" required />
-        <select id="role">
-          <option value="" disabled selected>Your role (optional)</option>
-          <option>Scientist / Researcher</option>
-          <option>Investor / VC / Analyst</option>
-          <option>Physician / Clinician</option>
-          <option>Biotech Executive</option>
-          <option>Student</option>
-          <option>Journalist / Writer</option>
-        </select>
-        <div class="interest-grid">
-          <label class="interest-check"><input type="checkbox" checked /> Science</label>
-          <label class="interest-check"><input type="checkbox" checked /> Company News</label>
-          <label class="interest-check"><input type="checkbox" checked /> Investing</label>
-          <label class="interest-check"><input type="checkbox" /> FDA Alerts</label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Subscribe — It's Free</button>
-        <p class="form-note">No spam. Unsubscribe any time.</p>
-        <div class="success-msg" id="success-msg">You're subscribed! Check your inbox for a confirmation.</div>
-      </form>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="logo">Bio<span>Signal</span></a>
-        <p>Independent biotech intelligence — science, companies, and investing in one place.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Science</h4>
-        <a href="#">Latest Research</a>
-        <a href="#">Clinical Trials</a>
-        <a href="#">Key Publications</a>
-        <a href="#">Breakthroughs</a>
-      </div>
-      <div class="footer-col">
-        <h4>Companies</h4>
-        <a href="#">Pipeline Tracker</a>
-        <a href="#">Company Profiles</a>
-        <a href="#">Catalyst Watch</a>
-        <a href="#">M&amp;A Activity</a>
-      </div>
-      <div class="footer-col">
-        <h4>Investing</h4>
-        <a href="#">FDA Calendar</a>
-        <a href="#">Funding Rounds</a>
-        <a href="#">IPO Tracker</a>
-        <a href="#">Market Indices</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Editorial Policy</a>
-        <a href="#">Advertise</a>
-        <a href="#">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Disclaimer</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 BioSignal. All rights reserved. &nbsp;&middot;&nbsp; <em>Data from RSS feeds, OpenFDA, NCBI PubMed, ClinicalTrials.gov, and SEC EDGAR. Not financial or medical advice.</em></p>
-      </div>
-    </div>
-  </footer>
 
   <script src="biosignal-data.js"></script>
   <script src="app.js"></script>

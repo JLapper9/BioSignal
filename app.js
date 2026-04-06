@@ -213,9 +213,12 @@ const animObserver = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 
-document.querySelectorAll(
-  '.news-card, .pillar-card, .market-tile, .company-card, .fda-entry, .funding-entry, .stat, .pub-card'
-).forEach(el => {
-  el.classList.add('anim-in');
+const animatedItems = document.querySelectorAll(
+  '.anim-in, .news-card, .pillar-card, .market-tile, .company-card, .fda-entry, .funding-entry, .stat, .pub-card'
+);
+animatedItems.forEach(el => {
+  if (!el.classList.contains('anim-in')) {
+    el.classList.add('anim-in');
+  }
   animObserver.observe(el);
 });
