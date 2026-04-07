@@ -71,6 +71,9 @@
     </div>
   </header>
 
+  <!-- API Status Bar (populated by page JS) -->
+  <div id="api-status-bar"></div>
+
   <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
   <div class="search-panel hidden" id="hub-search-panel">
     <div class="container">
@@ -113,13 +116,19 @@
         <a href="#science" class="view-all">View all headlines &rarr;</a>
       </div>
 
-      <!-- News topic filter pills -->
-      <div class="pill-row" id="hub-rss-pills">
-        <button class="cat-pill active" data-topic="all">All Topics</button>
-        <button class="cat-pill" data-topic="biotech">Biotech</button>
-        <button class="cat-pill" data-topic="fda">FDA</button>
-        <button class="cat-pill" data-topic="pharma">Pharma</button>
-        <button class="cat-pill" data-topic="trials">Clinical Trials</button>
+      <!-- News section search + topic pills -->
+      <div class="news-section-controls">
+        <div class="pill-row" id="hub-rss-pills" style="margin-bottom:0;flex:1;">
+          <button class="cat-pill active" data-topic="all">All Topics</button>
+          <button class="cat-pill" data-topic="biotech">Biotech</button>
+          <button class="cat-pill" data-topic="fda">FDA</button>
+          <button class="cat-pill" data-topic="pharma">Pharma</button>
+          <button class="cat-pill" data-topic="trials">Clinical Trials</button>
+        </div>
+        <div id="news-section-search-wrap" class="news-section-search-wrap">
+          <input type="search" id="news-section-search" class="news-section-search" placeholder="Filter headlines…" autocomplete="off" />
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-dark);pointer-events:none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
       </div>
 
       <!-- Two-col: live news + live trial sidebar -->

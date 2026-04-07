@@ -71,6 +71,9 @@
     </div>
   </header>
 
+  <!-- API Status Bar (populated by page JS) -->
+  <div id="api-status-bar"></div>
+
   <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
   <div class="search-panel hidden" id="hub-search-panel">
     <div class="container">
@@ -103,37 +106,129 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       MARKET OVERVIEW
+       MARKET OVERVIEW DASHBOARD
   ════════════════════════════════════════ -->
-  <section class="section" id="overview">
-    <div class="container">
-      <div class="section-badge funding-badge">Market Intelligence</div>
-      <div class="section-header-row">
-        <h2 class="section-title">Market Overview</h2>
-        <a href="#overview" class="view-all">Full market dashboard &rarr;</a>
-      </div>
-      <p class="section-sub">Key biotech market indicators and trends</p>
+  <section id="overview" class="mkt-overview-section">
 
-      <!-- Market stats grid -->
-      <div class="stats-grid" id="market-stats">
-        <div class="stat-card">
-          <div class="stat-value" id="market-cap">$1.2T</div>
-          <div class="stat-label">Total Biotech Market Cap</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="companies-count">1,847</div>
-          <div class="stat-label">Public Biotech Companies</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="funding-ytd">$45.2B</div>
-          <div class="stat-label">Funding Raised YTD</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="ipos-qtr">23</div>
-          <div class="stat-label">IPOs This Quarter</div>
-        </div>
+    <!-- 1 ── Ticker Tape ─────────────────────────────────────── -->
+    <div class="ticker-wrap" id="ticker-wrap">
+      <div class="ticker-track" id="ticker-track">
+        <span class="ticker-loading">Loading market data…</span>
       </div>
     </div>
+
+    <div class="container">
+      <div class="mkt-dashboard-header">
+        <div>
+          <div class="section-badge funding-badge">Market Intelligence</div>
+          <h2 class="section-title" style="margin-top:8px;">Market Overview</h2>
+        </div>
+        <div class="mkt-refresh-info">
+          <span class="mkt-live-dot"></span>
+          <span id="mkt-last-refresh">Refreshing…</span>
+          <span style="color:var(--text-dark);font-size:.75rem;">· 60 s auto-refresh</span>
+        </div>
+      </div>
+
+      <!-- 2 ── Sector Overview Cards ──────────────────────────── -->
+      <div class="mkt-sector-cards" id="mkt-sector-cards">
+        <div class="mkt-sector-card">
+          <div class="mkt-sc-label">XBI ETF <span style="font-size:.65rem;color:var(--text-dark);">SPDR Biotech</span></div>
+          <div class="mkt-sc-value" id="sc-xbi-price"><span class="mkt-spinner"></span></div>
+          <div class="mkt-sc-change" id="sc-xbi-chg">—</div>
+        </div>
+        <div class="mkt-sector-card">
+          <div class="mkt-sc-label">IBB ETF <span style="font-size:.65rem;color:var(--text-dark);">iShares Biotech</span></div>
+          <div class="mkt-sc-value" id="sc-ibb-price"><span class="mkt-spinner"></span></div>
+          <div class="mkt-sc-change" id="sc-ibb-chg">—</div>
+        </div>
+        <div class="mkt-sector-card">
+          <div class="mkt-sc-label">Sector Sentiment</div>
+          <div class="mkt-sc-value" id="sc-sentiment"><span class="mkt-spinner"></span></div>
+          <div class="mkt-sc-change" id="sc-sentiment-sub" style="font-size:.72rem;">Based on index momentum</div>
+        </div>
+        <div class="mkt-sector-card">
+          <div class="mkt-sc-label">IPOs This Quarter</div>
+          <div class="mkt-sc-value" id="sc-ipo-count"><span class="mkt-spinner"></span></div>
+          <div class="mkt-sc-change" id="sc-ipo-sub" style="font-size:.72rem;">Finnhub IPO calendar</div>
+        </div>
+      </div>
+
+      <!-- 3 ── Top Movers ─────────────────────────────────────── -->
+      <div class="mkt-two-col">
+        <div class="mkt-panel">
+          <div class="mkt-panel-hdr">
+            <span class="mkt-panel-title">&#9650; Top Gainers</span>
+            <span class="mkt-panel-sub">Today</span>
+          </div>
+          <div id="mkt-gainers"><div class="mkt-loading-row"><span class="mkt-spinner"></span> Loading…</div></div>
+        </div>
+        <div class="mkt-panel">
+          <div class="mkt-panel-hdr">
+            <span class="mkt-panel-title">&#9660; Top Losers</span>
+            <span class="mkt-panel-sub">Today</span>
+          </div>
+          <div id="mkt-losers"><div class="mkt-loading-row"><span class="mkt-spinner"></span> Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- 4 ── Watchlist Table ──────────────────────────────────── -->
+      <div class="mkt-panel" style="margin-top:24px;">
+        <div class="mkt-panel-hdr">
+          <span class="mkt-panel-title">Watchlist</span>
+          <span class="mkt-panel-sub">20 major biopharma stocks · click headers to sort</span>
+        </div>
+        <div class="mkt-table-wrap">
+          <table class="mkt-table" id="mkt-watchlist-table">
+            <thead>
+              <tr>
+                <th data-col="name"   class="sortable">Company</th>
+                <th data-col="symbol" class="sortable">Ticker</th>
+                <th data-col="price"  class="sortable">Price</th>
+                <th data-col="chgAmt" class="sortable">Change $</th>
+                <th data-col="chgPct" class="sortable">Change %</th>
+                <th data-col="open"   class="sortable">Open</th>
+                <th data-col="high"   class="sortable">Day High</th>
+                <th data-col="low"    class="sortable">Day Low</th>
+              </tr>
+            </thead>
+            <tbody id="mkt-watchlist-body">
+              <tr><td colspan="8" class="mkt-loading-cell"><span class="mkt-spinner"></span> Loading watchlist…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 5 + 6 ── Analyst Recs + Earnings Calendar ─────────────── -->
+      <div class="mkt-two-col" style="margin-top:24px;">
+        <div class="mkt-panel">
+          <div class="mkt-panel-hdr">
+            <span class="mkt-panel-title">Analyst Recommendations</span>
+            <span class="mkt-panel-sub">Finnhub consensus</span>
+          </div>
+          <div id="mkt-recs"><div class="mkt-loading-row"><span class="mkt-spinner"></span> Loading…</div></div>
+        </div>
+        <div class="mkt-panel">
+          <div class="mkt-panel-hdr">
+            <span class="mkt-panel-title">Earnings Calendar</span>
+            <span class="mkt-panel-sub">Next 14 days</span>
+          </div>
+          <div id="mkt-earnings"><div class="mkt-loading-row"><span class="mkt-spinner"></span> Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- 7 ── News Sentiment ──────────────────────────────────── -->
+      <div class="mkt-panel" style="margin-top:24px;margin-bottom:0;">
+        <div class="mkt-panel-hdr">
+          <span class="mkt-panel-title">News Sentiment</span>
+          <span class="mkt-panel-sub">Recent news signal · Finnhub</span>
+        </div>
+        <div class="mkt-sentiment-grid" id="mkt-sentiment">
+          <div class="mkt-loading-row" style="grid-column:1/-1"><span class="mkt-spinner"></span> Loading sentiment…</div>
+        </div>
+      </div>
+
+    </div><!-- /container -->
   </section>
 
   <!-- ═══════════════════════════════════════

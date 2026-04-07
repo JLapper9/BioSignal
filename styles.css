@@ -1630,10 +1630,16 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Research Strip ---------- */
 .pub-strip {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-top: 24px;
+}
+@media (max-width: 900px) {
+  .pub-strip { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .pub-strip { grid-template-columns: 1fr; }
 }
 
 .pub-card {
@@ -1642,6 +1648,8 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius);
   padding: 16px;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .pub-card:hover {
@@ -1909,4 +1917,62 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 900px) {
   .dash-search-wrap { max-width: 220px !important; }
+}
+
+/* ── API Status Bar ──────────────────────────────────────────── */
+.api-status-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 6px 0;
+}
+.api-status-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 2px 0;
+}
+.api-status-label {
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  white-space: nowrap;
+  padding-right: 4px;
+  border-right: 1px solid var(--border);
+  margin-right: 4px;
+}
+.api-ind {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .67rem;
+  color: var(--text-muted);
+  padding: 2px 8px 2px 6px;
+  border-radius: 20px;
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  transition: border-color .35s, color .35s;
+  white-space: nowrap;
+  cursor: default;
+}
+.api-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--text-dark);
+  transition: background .35s;
+}
+.api-ind.loading .api-dot { animation: pulse 1.2s ease-in-out infinite; }
+.api-ind.ok .api-dot      { background: var(--accent); }
+.api-ind.ok               { color: var(--text); border-color: rgba(0,212,170,.25); }
+.api-ind.error .api-dot   { background: var(--oncology); }
+.api-ind.error            { color: var(--oncology); border-color: rgba(248,113,113,.25); }
+.api-ind.warn .api-dot    { background: var(--funding-col); }
+.api-ind.warn             { color: var(--funding-col); border-color: rgba(250,204,21,.25); }
+.api-ind.idle             { opacity: .5; }
+@media (max-width: 600px) {
+  .api-status-bar { display: none; }
 }

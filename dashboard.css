@@ -685,3 +685,412 @@
   .dash-header .nav { display: none; }
   .placeholder-grid { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   NEWS SECTION ENHANCEMENTS
+═══════════════════════════════════════════════════════════════ */
+
+/* Controls row: pills + search side by side */
+.news-section-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Section-level search input */
+.news-section-search-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.news-section-search {
+  padding: 7px 32px 7px 12px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.84rem;
+  font-family: var(--font);
+  width: 200px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.news-section-search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
+}
+.news-section-search::placeholder { color: var(--text-dark); }
+
+/* Fetch timestamp on cards */
+.card-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.fetch-stamp {
+  font-size: 0.65rem;
+  color: var(--text-dark);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Priority SEC filing highlight */
+.sec-priority-label {
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .news-section-controls { flex-direction: column; align-items: flex-start; }
+  .news-section-search { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MARKET OVERVIEW DASHBOARD
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.mkt-overview-section {
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Spinner ── */
+.mkt-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: mkt-spin .7s linear infinite;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+@keyframes mkt-spin { to { transform: rotate(360deg); } }
+
+/* ── Live dot ── */
+.mkt-live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(0,212,170,.7);
+  animation: mkt-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes mkt-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* ── Dashboard header row ── */
+.mkt-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 28px 0 20px;
+}
+.mkt-refresh-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+
+/* ── 1. Ticker tape ── */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 0;
+  position: relative;
+}
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ticker-wrap::before { left: 0;  background: linear-gradient(to right, var(--bg-card), transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg-card), transparent); }
+
+.ticker-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: ticker-scroll 60s linear infinite;
+}
+.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 22px;
+  font-size: .82rem;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.ticker-sym  { font-weight: 700; color: #fff; letter-spacing: .03em; }
+.ticker-price { color: var(--text); }
+.ticker-chg  { font-weight: 600; }
+.ticker-up   { color: var(--accent); }
+.ticker-dn   { color: var(--oncology); }
+.ticker-loading { padding: 0 20px; color: var(--text-dark); font-size: .82rem; }
+
+/* ── 2. Sector cards ── */
+.mkt-sector-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.mkt-sector-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: border-color .2s;
+}
+.mkt-sector-card:hover { border-color: var(--border-bright); }
+.mkt-sc-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mkt-sc-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.03em;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mkt-sc-change {
+  font-size: .8rem;
+  font-weight: 600;
+  margin-top: 4px;
+  color: var(--text-muted);
+}
+.mkt-sc-change.up { color: var(--accent); }
+.mkt-sc-change.dn { color: var(--oncology); }
+
+/* ── Panel shell ── */
+.mkt-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.mkt-panel-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card2);
+}
+.mkt-panel-title {
+  font-size: .82rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .01em;
+}
+.mkt-panel-sub {
+  font-size: .72rem;
+  color: var(--text-dark);
+}
+.mkt-loading-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 18px;
+  color: var(--text-dark);
+  font-size: .82rem;
+}
+.mkt-unavail {
+  padding: 20px 18px;
+  color: var(--text-dark);
+  font-size: .82rem;
+  font-style: italic;
+}
+
+/* ── Two-column layout ── */
+.mkt-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── 3. Movers ── */
+.mkt-mover-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.mkt-mover-row:last-child { border-bottom: none; }
+.mkt-mover-row:hover { background: var(--bg-card2); }
+.mkt-mover-left { display: flex; flex-direction: column; gap: 2px; }
+.mkt-mover-sym  { font-size: .82rem; font-weight: 700; color: #fff; }
+.mkt-mover-name { font-size: .7rem; color: var(--text-dark); }
+.mkt-mover-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.mkt-mover-price { font-size: .82rem; color: var(--text); }
+.mkt-mover-pct   { font-size: .82rem; font-weight: 700; }
+.mkt-up   { color: var(--accent); }
+.mkt-dn   { color: var(--oncology); }
+
+/* ── 4. Watchlist table ── */
+.mkt-table-wrap { overflow-x: auto; }
+.mkt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .8rem;
+}
+.mkt-table thead th {
+  padding: 10px 14px;
+  text-align: right;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-dark);
+  background: var(--bg-card2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+.mkt-table thead th:first-child,
+.mkt-table thead th:nth-child(2) { text-align: left; }
+.mkt-table thead th.sortable { cursor: pointer; }
+.mkt-table thead th.sortable:hover { color: var(--accent); }
+.mkt-table thead th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
+.mkt-table thead th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+.mkt-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.mkt-table tbody tr:last-child { border-bottom: none; }
+.mkt-table tbody tr:hover { background: var(--bg-card2); }
+.mkt-table tbody td {
+  padding: 10px 14px;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+}
+.mkt-table tbody td:first-child { text-align: left; font-weight: 600; color: #fff; }
+.mkt-table tbody td:nth-child(2) { text-align: left; color: var(--text-dark); font-size: .75rem; font-weight: 600; letter-spacing: .03em; }
+.mkt-loading-cell {
+  text-align: center !important;
+  padding: 32px !important;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ── 6. Analyst recs bar ── */
+.mkt-rec-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.mkt-rec-row:last-child { border-bottom: none; }
+.mkt-rec-sym   { font-size: .8rem; font-weight: 700; color: #fff; }
+.mkt-rec-bar   { height: 8px; border-radius: 4px; display: flex; overflow: hidden; }
+.rec-sb  { background: #00d4aa; }
+.rec-b   { background: #34d399; }
+.rec-h   { background: #6b7280; }
+.rec-s   { background: #fb923c; }
+.rec-ss  { background: #f87171; }
+.mkt-rec-total { font-size: .7rem; color: var(--text-dark); white-space: nowrap; }
+
+/* ── 7. Earnings calendar ── */
+.mkt-earn-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.mkt-earn-row:last-child { border-bottom: none; }
+.mkt-earn-left { display: flex; flex-direction: column; gap: 2px; }
+.mkt-earn-sym  { font-size: .82rem; font-weight: 700; color: #fff; }
+.mkt-earn-name { font-size: .7rem; color: var(--text-dark); }
+.mkt-earn-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.mkt-earn-date { font-size: .75rem; color: var(--text-muted); }
+.mkt-earn-ampm { font-size: .65rem; padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+.earn-bmo { background: rgba(0,212,170,.12); color: var(--accent); }
+.earn-amc { background: rgba(59,130,246,.12); color: var(--accent2); }
+.earn-na  { background: var(--bg-card2); color: var(--text-dark); }
+.mkt-earn-eps { font-size: .72rem; color: var(--text-dark); }
+
+/* ── 8. Sentiment grid ── */
+.mkt-sentiment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0;
+}
+.mkt-sent-card {
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.mkt-sent-card:nth-child(n) { }
+.mkt-sent-sym   { font-size: .82rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.mkt-sent-label { font-size: .68rem; color: var(--text-dark); margin-bottom: 10px; }
+.mkt-sent-bar-wrap { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; margin-bottom: 4px; }
+.mkt-sent-bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+.mkt-sent-bull { background: var(--accent); }
+.mkt-sent-bear { background: var(--oncology); }
+.mkt-sent-pct  { font-size: .7rem; font-weight: 600; }
+.mkt-sent-bull-pct { color: var(--accent); }
+.mkt-sent-bear-pct { color: var(--oncology); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mkt-sector-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .mkt-two-col { grid-template-columns: 1fr; }
+  .mkt-sector-cards { grid-template-columns: repeat(2, 1fr); }
+  .mkt-sentiment-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .mkt-sector-cards { grid-template-columns: 1fr 1fr; }
+}

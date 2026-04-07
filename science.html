@@ -71,6 +71,9 @@
     </div>
   </header>
 
+  <!-- API Status Bar (populated by page JS) -->
+  <div id="api-status-bar"></div>
+
   <!-- ═══ GLOBAL SEARCH PANEL ═══ -->
   <div class="search-panel hidden" id="hub-search-panel">
     <div class="container">
@@ -146,11 +149,11 @@
 
       <!-- Trial filters -->
       <div class="pill-row" id="trial-pills">
-        <button class="cat-pill active" data-phase="all">All Phases</button>
+        <button class="cat-pill" data-phase="all">All Phases</button>
         <button class="cat-pill" data-phase="phase1">Phase 1</button>
-        <button class="cat-pill" data-phase="phase2">Phase 2</button>
+        <button class="cat-pill active" data-phase="phase2">Phase 2+</button>
         <button class="cat-pill" data-phase="phase3">Phase 3</button>
-        <button class="cat-pill" data-phase="recruiting">Recruiting</button>
+        <button class="cat-pill" data-phase="phase4">Phase 4</button>
       </div>
 
       <!-- Trial timeline — populated by science.js -->

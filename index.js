@@ -96,6 +96,11 @@
 
     var q = query.toLowerCase();
 
+    // Mark all search APIs as loading
+    BS.setAPIStatus('newsapi', 'loading');
+    BS.setAPIStatus('openfda', 'loading');
+    BS.setAPIStatus('trials',  'loading');
+
     // News local search
     try {
       var rssItems = (await BS.loadNews(60)).filter(function(it) {
@@ -114,7 +119,8 @@
               '</div>';
           }).join('')
         : '<div style="padding:12px;color:var(--text-dark);">No news matches.</div>';
-    } catch (e) {}
+      BS.setAPIStatus('newsapi', 'ok');
+    } catch (e) { BS.setAPIStatus('newsapi', 'error'); }
 
     // FDA + Trials in parallel
     var enc = encodeURIComponent(query);
@@ -154,12 +160,21 @@
               '</div>';
           }).join('')
         : '<div style="padding:12px;color:var(--text-dark);">No trials matched.</div>';
+
+      BS.setAPIStatus('openfda', fdaR.status === 'fulfilled' ? 'ok' : 'error');
+      BS.setAPIStatus('trials',  trR.status  === 'fulfilled' ? 'ok' : 'error');
     });
   }
 
   /* ── Init ─────────────────────────────────────────────────── */
 
   function init() {
+    // Home page search uses these APIs on demand — show as idle until triggered
+    BS.initStatusBar([
+      { id: 'newsapi', label: 'NewsAPI', idle: true },
+      { id: 'openfda', label: 'OpenFDA', idle: true },
+      { id: 'trials',  label: 'ClinicalTrials.gov', idle: true },
+    ]);
     initSearch();
   }
 
