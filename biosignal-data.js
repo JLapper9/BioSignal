@@ -17,10 +17,7 @@
   function clearCache() { Object.keys(_cache).forEach(k => delete _cache[k]); }
 
   /* ── API Keys ───────────────────────────────────────────────── */
-  const NEWS_API_KEY = 'b386f6a037d44e919e9b08b9e5131f14';
-
-  // ⚠️  Replace with your free Finnhub key from https://finnhub.io
-  const FINNHUB_KEY  = 'd79gh9hr01qqpmhgn5c0d79gh9hr01qqpmhgn5cg';
+  const NEWS_API_KEY = '';
 
   /* ── Queries ────────────────────────────────────────────────── */
   const NEWS_QUERY = 'biotech OR "FDA approval" OR pharmaceutical OR "clinical trials" OR "life sciences" OR "drug development"';
@@ -57,12 +54,12 @@
       return `https://efts.sec.gov/LATEST/search-index?q=%22merger%22+OR+%22acquisition%22+OR+%22acquires%22+OR+%22acquired%22&forms=8-K&dateRange=custom&startdt=${since}`;
     },
 
-    // Finnhub (CORS-enabled, free tier)
-    finnhubQuote:     (symbol)  => `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`,
-    finnhubIPO:       (from, to) => `https://finnhub.io/api/v1/calendar/ipo?from=${from}&to=${to}&token=${FINNHUB_KEY}`,
-    finnhubRecs:      (symbol)  => `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${FINNHUB_KEY}`,
-    finnhubEarnings:  (from, to) => `https://finnhub.io/api/v1/calendar/earnings?from=${from}&to=${to}&token=${FINNHUB_KEY}`,
-    finnhubSentiment: (symbol)  => `https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${FINNHUB_KEY}`,
+    // Finnhub (via Netlify proxy — key is server-side)
+    finnhubQuote:     (symbol)  => `/api/finnhub/quote?symbol=${symbol}`,
+    finnhubIPO:       (from, to) => `/api/finnhub/calendar/ipo?from=${from}&to=${to}`,
+    finnhubRecs:      (symbol)  => `/api/finnhub/stock/recommendation?symbol=${symbol}`,
+    finnhubEarnings:  (from, to) => `/api/finnhub/calendar/earnings?from=${from}&to=${to}`,
+    finnhubSentiment: (symbol)  => `/api/finnhub/news-sentiment?symbol=${symbol}`,
 
     // ChEMBL (public REST API, CORS-enabled, no key required)
     // drug_indication: returns molecule_chembl_id + efo_term/mesh_heading + max_phase_for_ind (float string)
@@ -153,10 +150,11 @@
   /* ── CORS proxy helper ──────────────────────────────────────── */
 
   async function _proxy(url, timeout) {
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+    const proxyUrl = '/api/proxy?url=' + encodeURIComponent(url);
     const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(timeout || 15000) });
     if (!res.ok) throw new Error('Proxy HTTP ' + res.status);
-    return res.json(); // returns { contents: '...', status: {...} }
+    const contents = await res.text();
+    return { contents };
   }
 
   /* ── NewsAPI (fallback only) ─────────────────────────────────── */
@@ -497,10 +495,6 @@
     const cached = _get(key);
     if (cached) return cached;
 
-    if (!FINNHUB_KEY || FINNHUB_KEY === 'YOUR_FINNHUB_KEY') {
-      return { noKey: true };
-    }
-
     const [xbiRes, ibbRes] = await Promise.allSettled([
       fetch(ENDPOINTS.finnhubQuote('XBI'), { signal: AbortSignal.timeout(8000) }).then(function(r) { return r.json(); }),
       fetch(ENDPOINTS.finnhubQuote('IBB'), { signal: AbortSignal.timeout(8000) }).then(function(r) { return r.json(); }),
@@ -567,10 +561,6 @@
     const key    = 'ipos';
     const cached = _get(key);
     if (cached) return cached.slice(0, limit);
-
-    if (!FINNHUB_KEY || FINNHUB_KEY === 'YOUR_FINNHUB_KEY') {
-      return [];
-    }
 
     const now  = new Date();
     const from = new Date(now.getTime() - 90 * 86400000).toISOString().split('T')[0];
