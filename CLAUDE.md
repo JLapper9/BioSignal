@@ -38,7 +38,7 @@ BioSignal is a biopharma intelligence hub for the RSM team. **Vanilla HTML/CSS/J
 - **Sources:** Fierce Biotech, Fierce Pharma, BioSpace, Google News biopharma
 - **Parsed with:** `DOMParser`, deduplicated by normalized 80-char title key
 - **Keyword filtered:** `NEWS_KEYWORDS` array (25+ terms)
-- **Fallback:** NewsAPI `b386f6a037d44e919e9b08b9e5131f14` (only if <10 RSS results)
+- **Fallback:** NewsAPI (key via `NEWSAPI_KEY` env var, injected server-side by `proxy.js`) — only if <10 RSS results
 
 ### OpenFDA (`api.fda.gov`) — no key
 | Endpoint | URL pattern | Notes |
