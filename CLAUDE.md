@@ -61,7 +61,7 @@ BioSignal is a biopharma intelligence hub for the RSM team. **Vanilla HTML/CSS/J
 - **Do NOT `encodeURIComponent` the `forms=` param** — encoded commas break query
 - Priority 8-K keywords: `"clinical results" OR "partnership" OR "license agreement" OR "merger" OR "acquisition" OR "FDA approval" OR "PDUFA"`
 
-### Finnhub — key: `d79gh9hr01qqpmhgn5c0d79gh9hr01qqpmhgn5cg`
+### Finnhub — key via `FINNHUB_API_KEY` env var, injected server-side by `netlify/functions/finnhub.js`
 - Rate limit: 60 calls/min. Budget: 20 watchlist + recs + sentiment ≈ 32/cycle
 - `_qCache` TTL = 55s (separate from 5-min `_cache`). Quotes refresh every 60s, rest every 5min
 - Endpoints: `/quote`, `/calendar/ipo` (needs `from`+`to`), `/stock/recommendation`, `/calendar/earnings`, `/news-sentiment`
