@@ -161,7 +161,7 @@
 
   async function _loadNewsAPIFallback() {
     const apiUrl = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(NEWS_QUERY) +
-      '&language=en&sortBy=publishedAt&pageSize=40&apiKey=' + NEWS_API_KEY;
+      '&language=en&sortBy=publishedAt&pageSize=40' + (NEWS_API_KEY ? '&apiKey=' + NEWS_API_KEY : '');
     let data;
     try {
       const r = await fetch(apiUrl, { signal: AbortSignal.timeout(12000) });
@@ -674,7 +674,7 @@
 
     const maQuery = 'acquisition OR merger biotech OR pharma OR biopharma';
     const newsUrl = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(maQuery) +
-      '&language=en&sortBy=publishedAt&pageSize=10&apiKey=' + NEWS_API_KEY;
+      '&language=en&sortBy=publishedAt&pageSize=10' + (NEWS_API_KEY ? '&apiKey=' + NEWS_API_KEY : '');
 
     const [secRes, newsRes] = await Promise.allSettled([
       _proxy(ENDPOINTS.secMASearch(), 12000).then(function(w) { return JSON.parse(w.contents || '{}'); }),
@@ -741,7 +741,7 @@
 
     const fundingQuery = '"series A" OR "series B" OR "series C" OR "series D" OR "funding round" OR raised biotech OR pharma OR biopharma';
     const apiUrl = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(fundingQuery) +
-      '&language=en&sortBy=publishedAt&pageSize=15&apiKey=' + NEWS_API_KEY;
+      '&language=en&sortBy=publishedAt&pageSize=15' + (NEWS_API_KEY ? '&apiKey=' + NEWS_API_KEY : '');
 
     let data;
     try {

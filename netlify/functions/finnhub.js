@@ -3,7 +3,8 @@ exports.handler = async function (event) {
   if (!key) return { statusCode: 500, body: 'Missing FINNHUB_API_KEY' };
 
   const path = event.path.replace(/^\/.netlify\/functions\/finnhub/, '');
-  const url = `https://finnhub.io/api/v1${path}&token=${key}`;
+  const qs = event.rawQuery ? `?${event.rawQuery}&token=${key}` : `?token=${key}`;
+  const url = `https://finnhub.io/api/v1${path}${qs}`;
 
   try {
     const res = await fetch(url);
